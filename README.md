@@ -10,10 +10,10 @@ The Research Edge Series provides evidence-based guidance for researchers who wa
 
 ## Core Principles
 
-- **Theoretical Rigor:** Every recommendation is grounded in established research methodology
-- **Practical Application:** Complex concepts explained through real-world examples  
-- **Error Prevention:** Focus on avoiding systematic biases that compound across studies
-- **Actionable Insights:** Move from "interesting findings" to strategic decisions
+• **Theoretical Rigor:** Every recommendation is grounded in established research methodology
+• **Practical Application:** Complex concepts explained through real-world examples  
+• **Error Prevention:** Focus on avoiding systematic biases that compound across studies
+• **Actionable Insights:** Move from "interesting findings" to strategic decisions
 
 ## Article Index
 
@@ -23,10 +23,10 @@ The Research Edge Series provides evidence-based guidance for researchers who wa
 Learn why most research fails before data collection even begins. Discover the fundamental distinction between reflective and formative constructs, understand how measurement model misspecification can inflate your findings by 400%, and see how to fix the most common survey design errors.
 
 **Key Topics:**
-- The consumer-as-researcher fallacy
-- Reflective vs. formative measurement models
-- Systematic bias in causal attribution
-- Step-by-step measurement design
+• The consumer-as-researcher fallacy
+• Reflective vs. formative measurement models
+• Systematic bias in causal attribution
+• Step-by-step measurement design
 
 ---
 
