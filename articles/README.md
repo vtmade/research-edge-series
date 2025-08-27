@@ -4,12 +4,12 @@ This directory contains all articles in the Research Edge Series, organized by p
 
 ## Published Articles
 
-### #001: The Research Validity Crisis
-**File:** `001-research-validity-crisis.md`  
-**Topic:** Research Validity and the Replication Crisis  
+### #001: Why Consumers Unconsciously Mislead Us
+**File:** `001-unconscious-consumer-behavior.md`  
+**Topic:** Consumer Decision-Making and Research Methodology  
 **Date:** August 27, 2025
 
-Why 80% of published research cannot be trusted and how this affects business decisions. Learn the four deadly sins of research methodology and how to evaluate research quality.
+Understanding post-hoc rationalization in consumer research. Learn why consumers cannot consciously access their decision processes and how expert researchers use perception association techniques to uncover real choice drivers.
 
 ### #002: The Science of Proper Measurement
 **File:** `002-measurement-fundamentals.md`  
