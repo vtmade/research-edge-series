@@ -17,18 +17,18 @@ The Research Edge Series provides evidence-based guidance for researchers who wa
 
 ## Article Index
 
-### [#001: The Research Validity Crisis](./articles/001-research-validity-crisis.md)
-**Why 80% of Published Research Cannot Be Trusted**
+### [#001: Why Consumers Unconsciously Mislead Us](./articles/001-unconscious-consumer-behavior.md)
+**Understanding Post-Hoc Rationalization in Consumer Research**
 
-Discover why most research fails basic validity tests and how this affects your business decisions. Learn to identify the four deadly sins of research design, understand the real cost of bad research, and develop systems for evaluating research quality before acting on findings.
+Discover why consumers do not have conscious access to their decision-making processes and how post-hoc rationalization creates misleading research insights. Learn why direct "why" questions fail and how expert researchers use perception association methods to uncover real decision drivers.
 
 **Key Topics:**
-• The replication crisis and its business impact
-• Four deadly sins of research methodology
-• How to evaluate research quality
-• Building organizational research capability
+• Post-hoc rationalization and System 1 vs System 2 thinking
+• Why direct questions about decision reasons fail
+• Perception association research techniques
+• Business impact of misunderstanding decision drivers
 
-**Available Formats:** [📄 Article](./articles/001-research-validity-crisis.md) | [📁 PDF](./assets/001-research-validity-crisis.pdf)
+**Available Formats:** [📄 Article](./articles/001-unconscious-consumer-behavior.md) | [📁 PDF](./assets/001-unconscious-consumer-behavior.pdf)
 
 ### [#002: The Science of Proper Measurement](./articles/002-measurement-fundamentals.md)
 **Moving Beyond Casual Surveys to Rigorous Research Design**
