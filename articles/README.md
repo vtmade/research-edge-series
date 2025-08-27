@@ -4,6 +4,13 @@ This directory contains all articles in the Research Edge Series, organized by p
 
 ## Published Articles
 
+### #001: The Research Validity Crisis
+**File:** `001-research-validity-crisis.md`  
+**Topic:** Research Validity and the Replication Crisis  
+**Date:** August 27, 2025
+
+Why 80% of published research cannot be trusted and how this affects business decisions. Learn the four deadly sins of research methodology and how to evaluate research quality.
+
 ### #002: The Science of Proper Measurement
 **File:** `002-measurement-fundamentals.md`  
 **Topic:** Construct Measurement and Survey Design Fundamentals  
