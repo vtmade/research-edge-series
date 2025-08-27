@@ -28,6 +28,8 @@ Learn why most research fails before data collection even begins. Discover the f
 • Systematic bias in causal attribution
 • Step-by-step measurement design
 
+**Available Formats:** [📄 Article](./articles/002-measurement-fundamentals.md) | [📁 PDF](./assets/002-research-edge-series-measurement-fundamentals.pdf)
+
 ---
 
 ## Repository Structure
@@ -35,7 +37,7 @@ Learn why most research fails before data collection even begins. Discover the f
 ```
 research-edge-series/
 ├── articles/           # Series articles in markdown format
-├── assets/            # Images, diagrams, and supporting materials  
+├── assets/            # PDFs, images, diagrams, and supporting materials  
 ├── docs/              # Additional documentation and resources
 └── README.md          # This file
 ```
