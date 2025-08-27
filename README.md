@@ -17,6 +17,19 @@ The Research Edge Series provides evidence-based guidance for researchers who wa
 
 ## Article Index
 
+### [#001: The Research Validity Crisis](./articles/001-research-validity-crisis.md)
+**Why 80% of Published Research Cannot Be Trusted**
+
+Discover why most research fails basic validity tests and how this affects your business decisions. Learn to identify the four deadly sins of research design, understand the real cost of bad research, and develop systems for evaluating research quality before acting on findings.
+
+**Key Topics:**
+• The replication crisis and its business impact
+• Four deadly sins of research methodology
+• How to evaluate research quality
+• Building organizational research capability
+
+**Available Formats:** [📄 Article](./articles/001-research-validity-crisis.md) | [📁 PDF](./assets/001-research-validity-crisis.pdf)
+
 ### [#002: The Science of Proper Measurement](./articles/002-measurement-fundamentals.md)
 **Moving Beyond Casual Surveys to Rigorous Research Design**
 
