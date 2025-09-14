@@ -8,11 +8,11 @@ Contemporary business research suffers from a fundamental misunderstanding of st
 
 The confusion surrounding sample size stems from conflating different types of measurement precision. Consider two distinct scenarios that illuminate this principle:
 
-**Astronomical Measurement**: When detecting exoplanets through stellar wobble analysis, astronomers require only enough precision to distinguish signal from noise. A planet's gravitational effect on its host star creates a measurable but minute Doppler shift. The detection threshold is binary—either the planet exists or it doesn't. Once the signal exceeds background noise with statistical confidence, additional observations yield diminishing returns.
+**Astronomical Measurement**: When detecting exoplanets through stellar wobble analysis, astronomers require only enough precision to distinguish signal from noise. A planet's gravitational effect on its host star creates a measurable but minute Doppler shift. The detection threshold is binary, either the planet exists or it doesn't. Once the signal exceeds background noise with statistical confidence, additional observations yield diminishing returns.
 
 **Engineering Measurement**: Conversely, structural engineers measuring steel beam tolerances for bridge construction require extreme precision—typically within ±1 millimeter. Here, the consequences of imprecision are catastrophic, demanding measurement systems capable of detecting minute variations that could compromise structural integrity.
 
-This fundamental distinction explains why most business surveys operate under flawed assumptions. Marketing research asking "Do consumers prefer Product A or Product B?" resembles astronomical detection more than engineering precision. Yet organizations routinely demand engineering-level sample sizes for astronomical-level questions.
+This fundamental distinction explains why most surveys operate under flawed assumptions. Marketing research asking "Do consumers prefer Product A or Product B?" resembles astronomical detection more than engineering precision. Yet we routinely demand engineering-level sample sizes for astronomical-level questions.
 
 ## The Population Size Fallacy: Mathematical Reality vs. Intuitive Logic
 
