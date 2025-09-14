@@ -43,6 +43,19 @@ Learn why most research fails before data collection even begins. Discover the f
 
 **Available Formats:** [📄 Article](./articles/002-measurement-fundamentals.md) | [📁 PDF](./assets/002-research-edge-series-measurement-fundamentals.pdf)
 
+### [#003: The Sample Size Paradox](./articles/003-sample-size-paradox.md)
+**Why Statistical Precision Trumps Intuitive Mathematics**
+
+Contemporary business research suffers from a fundamental misunderstanding of statistical sampling theory, leading to systematic over-sampling and resource misallocation. Discover why population size bears minimal relationship to required sample sizes and how precision requirements should drive sampling decisions.
+
+**Key Topics:**
+• The precision framework: Astronomical vs. engineering measurement standards
+• Mathematical reality vs. intuitive logic in population sampling
+• International research standards from WHO and UNICEF
+• Decision frameworks for optimal sample size determination
+
+**Available Formats:** [📄 Article](./articles/003-sample-size-paradox.md) | [📁 PDF](./assets/Sample%20Precision.pdf)
+
 ---
 
 ## Repository Structure
