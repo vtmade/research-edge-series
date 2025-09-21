@@ -56,11 +56,18 @@ Contemporary business research suffers from a fundamental misunderstanding of st
 
 **Available Formats:** [📄 Article](./articles/003-sample-size-paradox.md) | [📁 PDF](./assets/Sample%20Precision.pdf)
 
-**Experimental Validation:** This article includes real-world validation using 1 million NYC taxi transactions. See supporting materials:
-• [🎯 Sampling Accuracy Heatmap](./assets/enhanced_font_heatmap.png) - Visual demonstration of sampling precision across different sample sizes
-• [💻 Experimental Code](./assets/efficient_taxi_sampling.py) - Complete Python implementation
-• [📊 Population Parameters](./assets/population_parameters.csv) - Ground truth from 1M transactions
-• [📈 Sampling Results](./assets/hundred_samples_summary.csv) - Statistical validation data
+### [#003-Supplement: Can 300 Taxi Rides Represent a Million Rides?](./articles/003-supplement-taxi-experiment.md)
+**Experimental Validation Using Real NYC Taxi Data**
+
+This supplementary article provides real-world experimental validation of the Sample Size Paradox using 1 million NYC taxi transactions. Demonstrates empirically how sample size affects estimate precision and validates the Central Limit Theorem through systematic sampling simulation.
+
+**Key Findings:**
+• Dramatic accuracy improvements from n=30 to n=300 (6 percentage points precision gain)
+• Diminishing returns beyond n=500 samples
+• Statistical theory validated with 98% accuracy across all sample sizes
+• Visual demonstration of sampling variability through heatmap analysis
+
+**Supporting Materials:** [🎯 Sampling Heatmap](./assets/enhanced_font_heatmap.png) | [💻 Python Code](./assets/efficient_taxi_sampling.py) | [📊 Data](./assets/population_parameters.csv)
 
 ---
 
