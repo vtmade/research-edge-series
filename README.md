@@ -56,6 +56,12 @@ Contemporary business research suffers from a fundamental misunderstanding of st
 
 **Available Formats:** [📄 Article](./articles/003-sample-size-paradox.md) | [📁 PDF](./assets/Sample%20Precision.pdf)
 
+**Experimental Validation:** This article includes real-world validation using 1 million NYC taxi transactions. See supporting materials:
+• [🎯 Sampling Accuracy Heatmap](./assets/enhanced_font_heatmap.png) - Visual demonstration of sampling precision across different sample sizes
+• [💻 Experimental Code](./assets/efficient_taxi_sampling.py) - Complete Python implementation
+• [📊 Population Parameters](./assets/population_parameters.csv) - Ground truth from 1M transactions
+• [📈 Sampling Results](./assets/hundred_samples_summary.csv) - Statistical validation data
+
 ---
 
 ## Repository Structure

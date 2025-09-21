@@ -1,0 +1,6 @@
+Payment_Type,Count,Percentage,Description
+1.0,661325,66.13,Credit Card Payments
+2.0,330095,33.01,Cash Payments
+3.0,5975,0.60,No Charge
+4.0,2605,0.26,Dispute
+Total,1000000,100.00,Total Population Sample
