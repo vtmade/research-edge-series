@@ -67,7 +67,7 @@ This supplementary article provides real-world experimental validation of the Sa
 • Statistical theory validated with 98% accuracy across all sample sizes
 • Visual demonstration of sampling variability through heatmap analysis
 
-**Supporting Materials:** [🎯 Sampling Heatmap](./assets/enhanced_font_heatmap.png) | [💻 Python Code](./assets/efficient_taxi_sampling.py) | [📊 Data](./assets/population_parameters.csv)
+**Supporting Materials:** [🎯 Sampling Heatmap](./assets/003-supplement-taxi-experiment/enhanced_font_heatmap.png) | [💻 Python Code](./assets/003-supplement-taxi-experiment/efficient_taxi_sampling.py) | [📊 Data](./assets/003-supplement-taxi-experiment/population_parameters.csv)
 
 ---
 
