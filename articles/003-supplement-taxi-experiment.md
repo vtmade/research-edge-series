@@ -19,7 +19,7 @@ I used the "New York City Taxi Trips 2019" dataset from Kaggle. This dataset ori
 
 To keep analysis focused, I selected payment method used from this publicly available dataset. This simplifies demonstration without losing complexity.
 
-![Experiment Design](../assets/enhanced_font_heatmap.png)
+![Experiment Design](../assets/003-supplement-taxi-experiment/enhanced_font_heatmap.png)
 
 ## Experiment Design
 
@@ -78,11 +78,11 @@ The beauty lies in witnessing hundreds of year old mathematical theory play out 
 ## Supporting Materials
 
 ### Experimental Data
-- **Population Parameters:** [📊 Ground Truth Data](../assets/population_parameters.csv)
-- **Sampling Results:** [📈 Statistical Validation](../assets/hundred_samples_summary.csv)
+- **Population Parameters:** [📊 Ground Truth Data](../assets/003-supplement-taxi-experiment/population_parameters.csv)
+- **Sampling Results:** [📈 Statistical Validation](../assets/003-supplement-taxi-experiment/hundred_samples_summary.csv)
 
 ### Code Implementation
-- **Complete Analysis:** [💻 Python Implementation](../assets/efficient_taxi_sampling.py)
+- **Complete Analysis:** [💻 Python Implementation](../assets/003-supplement-taxi-experiment/efficient_taxi_sampling.py)
 
 ### References
 - **Data Source:** New York City Taxi Trips 2019 (Kaggle)
