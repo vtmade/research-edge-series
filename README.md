@@ -69,6 +69,20 @@ This supplementary article provides real-world experimental validation of the Sa
 
 **Supporting Materials:** [🎯 Sampling Heatmap](./assets/003-supplement-taxi-experiment/enhanced_font_heatmap.png) | [💻 Python Code](./assets/003-supplement-taxi-experiment/efficient_taxi_sampling.py) | [📊 Data](./assets/003-supplement-taxi-experiment/population_parameters.csv)
 
+### [#004: The Trait Trap](./articles/004-the-trait-trap.md)
+**Why Copying Successful Companies Usually Fails (And How Rigorous Research Fixes This)**
+
+Understand why most business advice misleads us by confusing correlation with causation. Learn the difference between anecdotal pattern-matching and rigorous causal analysis, including reverse causality, confounding variables, and how researchers use regression analysis and propensity score matching to establish probable cause.
+
+**Key Topics:**
+• The halo effect and survivorship bias in business research
+• Three types of false causation: reverse causality, confounders, and pure correlation
+• Regression analysis and statistical controls explained
+• Propensity score matching: finding statistical twins
+• How to evaluate business advice critically
+
+**Available Formats:** [📄 Article](./articles/004-the-trait-trap.md) | [📁 PDF](./assets/004%20The%20Trait%20Trap.pdf)
+
 ---
 
 ## Repository Structure
