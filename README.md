@@ -121,4 +121,4 @@ This content is designed for educational and professional development purposes. 
 
 ---
 
-**Research Edge Series** - Transforming how we approach social research methodology.
+**Research Edge Series** - Transforming how we approach social & business research methodology.
