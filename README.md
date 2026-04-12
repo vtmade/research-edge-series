@@ -2,7 +2,7 @@
 
 > **Rigorous Research Methodology for Social Scientists and Market Researchers**
 
-By **Vinay Thakur**
+By **Vinay Thakur** · [#vtmade](https://github.com/vtmade)
 
 ## About the Series
 
@@ -83,6 +83,22 @@ Understand why most business advice misleads us by confusing correlation with ca
 
 **Available Formats:** [📄 Article](./articles/004-the-trait-trap.md) | [📁 PDF](./assets/004%20The%20Trait%20Trap.pdf)
 
+### [#005: AI and the Qualitative Analysis Problem](./articles/005-ai-qualitative-analysis.md)
+**Why Most AI Tools Flatten Qualitative Data, and What Rigorous Analysis Actually Requires**
+
+Understand why most AI-powered qualitative analysis produces summaries that look useful but fall apart under scrutiny. Learn what rigorous qualitative analysis actually involves — from coding and theme construction to pattern detection and cross-case analysis — and how to use AI as a structured coding layer that preserves traceability, confidence levels, and outliers.
+
+**Key Topics:**
+• Why AI summaries of qualitative data are analytically useless
+• Grounded Theory and Thematic Analysis fundamentals
+• The Code → Theme → Pattern → Cross-case sequence
+• Six pattern lenses: similarity, difference, frequency, sequence, co-occurrence, cause
+• Structured analytical output vs. summary generation
+
+**Available Formats:** [📄 Article](./articles/005-ai-qualitative-analysis.md)
+
+**Claude Skill:** A companion Claude Skill for structured qualitative analysis is available in the [claude-skills](./claude-skills/) directory.
+
 ---
 
 ## Repository Structure
@@ -90,8 +106,8 @@ Understand why most business advice misleads us by confusing correlation with ca
 ```
 research-edge-series/
 ├── articles/           # Series articles in markdown format
-├── assets/            # PDFs, images, diagrams, and supporting materials  
-├── docs/              # Additional documentation and resources
+├── assets/            # PDFs, images, diagrams, and supporting materials
+├── claude-skills/     # Claude Skills for research methodology
 └── README.md          # This file
 ```
 
@@ -108,7 +124,7 @@ When referencing articles from this series, please use:
 
 ```
 Thakur, V. (2025). [Article Title]. Research Edge Series #[Number]. 
-Retrieved from https://github.com/[username]/research-edge-series
+Retrieved from https://github.com/vtmade/research-edge-series
 ```
 
 ## Contact
@@ -121,4 +137,4 @@ This content is designed for educational and professional development purposes. 
 
 ---
 
-**Research Edge Series** - Transforming how we approach social & business research methodology.
+**Research Edge Series** · #vtmade - Transforming how we approach social & business research methodology.
