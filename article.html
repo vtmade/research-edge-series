@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading... — Research/Edge Series</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-warm: #f9f7f4;
+      --color-text: #191919;
+      --color-text-secondary: #555555;
+      --color-text-tertiary: #888888;
+      --color-accent: #c4703f;
+      --color-border: #e5e5e5;
+      --color-border-light: #efefef;
+      --color-code-bg: #f5f3f0;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: rgba(196, 112, 63, 0.15);
+    }
+
+    /* ─── Navigation ─── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-logo .sep {
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.825rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* ─── Article Header ─── */
+
+    .article-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 8rem 3rem 3rem;
+    }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .article-back:hover {
+      color: var(--color-text);
+    }
+
+    .article-num-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .article-hero-title {
+      font-weight: 600;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      max-width: 720px;
+      margin-bottom: 1rem;
+    }
+
+    .article-hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-hero-meta {
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .article-hero-meta a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .article-hero-meta a:hover {
+      opacity: 0.7;
+    }
+
+    .header-divider {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .header-divider hr {
+      border: none;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* ─── Article Content ─── */
+
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 3rem 6rem;
+    }
+
+    /* Markdown rendered styles */
+    .article-content h1 {
+      display: none; /* hide the first H1 since we show it in the header */
+    }
+
+    .article-content h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1rem;
+      color: var(--color-text);
+      line-height: 1.2;
+    }
+
+    .article-content h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 2.25rem 0 0.75rem;
+      color: var(--color-text);
+    }
+
+    .article-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.5rem;
+      color: var(--color-text);
+    }
+
+    .article-content p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .article-content strong {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .article-content em {
+      font-style: italic;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: 0 0 1.25rem 1.25rem;
+      color: var(--color-text-secondary);
+    }
+
+    .article-content li {
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 0.4rem;
+    }
+
+    .article-content blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 3px solid var(--color-accent);
+      background: var(--color-bg-warm);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .article-content blockquote p {
+      color: var(--color-text);
+      margin-bottom: 0;
+      font-size: 0.95rem;
+    }
+
+    .article-content code {
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      background: var(--color-code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+
+    .article-content pre {
+      margin: 1.5rem 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--color-code-bg);
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid var(--color-border-light);
+    }
+
+    .article-content pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .article-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .article-content th {
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 1rem;
+      border-bottom: 2px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    .article-content td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--color-border-light);
+      color: var(--color-text-secondary);
+    }
+
+    .article-content hr {
+      border: none;
+      height: 1px;
+      background: var(--color-border);
+      margin: 2.5rem 0;
+    }
+
+    .article-content a {
+      color: var(--color-accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .article-content a:hover {
+      border-bottom-color: var(--color-accent);
+    }
+
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    /* ─── Loading / Error States ─── */
+
+    .loading-state {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+      text-align: center;
+      color: var(--color-text-tertiary);
+      font-size: 0.9rem;
+    }
+
+    .error-state {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+      text-align: center;
+    }
+
+    .error-state h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .error-state p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ─── Article Nav (prev/next) ─── */
+
+    .article-nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid var(--color-border);
+      padding-top: 2rem;
+    }
+
+    .article-nav a {
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .article-nav a:hover {
+      opacity: 0.7;
+    }
+
+    .article-nav .nav-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ─── Footer ─── */
+
+    footer {
+      background: var(--color-bg-warm);
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-left .sep {
+      color: var(--color-accent);
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-right a {
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover {
+      color: var(--color-text);
+    }
+
+    /* ─── Responsive ─── */
+
+    @media (max-width: 768px) {
+      .article-header {
+        padding: 7rem 1.5rem 2rem;
+      }
+      .article-content {
+        padding: 2rem 1.5rem 4rem;
+      }
+      .article-nav {
+        padding: 2rem 1.5rem 3rem;
+        flex-direction: column;
+      }
+      .nav-inner {
+        padding: 0 1.5rem;
+      }
+      .nav-links { display: none; }
+      .footer-inner {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="./index.html" class="nav-logo">Research<span class="sep">/</span>Edge</a>
+      <ul class="nav-links">
+        <li><a href="./index.html#pillars">Approach</a></li>
+        <li><a href="./index.html#articles">Articles</a></li>
+        <li><a href="./index.html#tools">Tools</a></li>
+        <li><a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Article Header (populated by JS) -->
+  <header class="article-header" id="article-header">
+    <a href="./index.html#articles" class="article-back">&larr; All articles</a>
+    <div class="article-num-label" id="article-num-label"></div>
+    <h1 class="article-hero-title" id="article-hero-title"></h1>
+    <p class="article-hero-subtitle" id="article-hero-subtitle"></p>
+    <div class="article-hero-meta" id="article-hero-meta"></div>
+  </header>
+
+  <div class="header-divider"><hr></div>
+
+  <!-- Article Body -->
+  <article class="article-content" id="article-content">
+    <div class="loading-state" id="loading">Loading article...</div>
+  </article>
+
+  <!-- Prev / Next Nav -->
+  <div class="article-nav" id="article-nav"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        Research<span class="sep">/</span>Edge Series&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2025
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
+        <a href="https://github.com/vtmade" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Article registry
+    const articles = [
+      {
+        id: '001-unconscious-consumer-behavior',
+        num: '#001',
+        title: 'Why Consumers Unconsciously Mislead Us',
+        subtitle: 'Understanding Post-Hoc Rationalization in Consumer Research',
+        date: 'August 2025',
+        pdf: './assets/001-unconscious-consumer-behavior.pdf'
+      },
+      {
+        id: '002-measurement-fundamentals',
+        num: '#002',
+        title: 'The Science of Proper Measurement',
+        subtitle: 'Moving Beyond Casual Surveys to Rigorous Research Design',
+        date: 'August 2025',
+        pdf: './assets/002-research-edge-series-measurement-fundamentals.pdf'
+      },
+      {
+        id: '003-sample-size-paradox',
+        num: '#003',
+        title: 'The Sample Size Paradox',
+        subtitle: 'Why Statistical Precision Trumps Intuitive Mathematics',
+        date: 'September 2025',
+        pdf: './assets/Sample%20Precision.pdf'
+      },
+      {
+        id: '003-supplement-taxi-experiment',
+        num: '#003 — Supplement',
+        title: 'Can 300 Taxi Rides Represent a Million Rides?',
+        subtitle: 'Experimental Validation Using Real NYC Taxi Data',
+        date: 'September 2025',
+        pdf: null
+      },
+      {
+        id: '004-the-trait-trap',
+        num: '#004',
+        title: 'The Trait Trap',
+        subtitle: 'Why Copying Successful Companies Usually Fails',
+        date: '2025',
+        pdf: './assets/004%20The%20Trait%20Trap.pdf'
+      },
+      {
+        id: '005-ai-qualitative-analysis',
+        num: '#005',
+        title: 'AI and the Qualitative Analysis Problem',
+        subtitle: 'Why Most AI Tools Flatten Qualitative Data',
+        date: '2025',
+        pdf: null
+      }
+    ];
+
+    // Get article ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get('id');
+    const currentIndex = articles.findIndex(a => a.id === articleId);
+    const article = articles[currentIndex];
+
+    if (!article) {
+      document.getElementById('article-header').style.display = 'none';
+      document.querySelector('.header-divider').style.display = 'none';
+      document.getElementById('article-content').innerHTML = `
+        <div class="error-state">
+          <h2>Article not found</h2>
+          <p>The article you're looking for doesn't exist. <a href="./index.html#articles">Browse all articles</a>.</p>
+        </div>
+      `;
+    } else {
+      // Populate header
+      document.title = article.title + ' — Research/Edge Series';
+      document.getElementById('article-num-label').textContent = article.num;
+      document.getElementById('article-hero-title').textContent = article.title;
+      document.getElementById('article-hero-subtitle').textContent = article.subtitle;
+
+      let metaHtml = `<span>${article.date}</span><span>Vinay Thakur</span>`;
+      if (article.pdf) {
+        metaHtml += `<a href="${article.pdf}">Download PDF ↗</a>`;
+      }
+      document.getElementById('article-hero-meta').innerHTML = metaHtml;
+
+      // Fetch and render markdown
+      fetch('./articles/' + article.id + '.md')
+        .then(res => {
+          if (!res.ok) throw new Error('Not found');
+          return res.text();
+        })
+        .then(md => {
+          document.getElementById('article-content').innerHTML = marked.parse(md);
+        })
+        .catch(() => {
+          document.getElementById('article-content').innerHTML = `
+            <div class="error-state">
+              <h2>Could not load article</h2>
+              <p>There was a problem loading the content. Try viewing the <a href="./articles/${article.id}.md">raw markdown</a> instead.</p>
+            </div>
+          `;
+        });
+
+      // Prev / Next navigation
+      const navEl = document.getElementById('article-nav');
+      let navHtml = '';
+
+      if (currentIndex > 0) {
+        const prev = articles[currentIndex - 1];
+        navHtml += `<a href="./article.html?id=${prev.id}">
+          <span class="nav-label">&larr; Previous</span>
+          ${prev.title}
+        </a>`;
+      } else {
+        navHtml += '<span></span>';
+      }
+
+      if (currentIndex < articles.length - 1) {
+        const next = articles[currentIndex + 1];
+        navHtml += `<a href="./article.html?id=${next.id}" style="text-align:right;">
+          <span class="nav-label">Next &rarr;</span>
+          ${next.title}
+        </a>`;
+      }
+
+      navEl.innerHTML = navHtml;
+    }
+  </script>
+
+</body>
+</html>

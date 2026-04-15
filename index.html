@@ -450,6 +450,274 @@
       display: block;
     }
 
+    /* ─── Tools Section ─── */
+
+    .tools-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 3rem 5rem;
+    }
+
+    .tool-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tool-visual {
+      background: linear-gradient(135deg, var(--warm-sand) 0%, var(--soft-terracotta) 50%, var(--blush) 100%);
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-visual-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .tool-visual-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .tool-visual-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(25, 25, 25, 0.5);
+    }
+
+    /* floating decorative shapes on tool visual */
+    .tool-visual::before,
+    .tool-visual::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+    }
+
+    .tool-visual::before {
+      width: 200px;
+      height: 200px;
+      background: white;
+      top: -40px;
+      right: -40px;
+    }
+
+    .tool-visual::after {
+      width: 150px;
+      height: 150px;
+      background: white;
+      bottom: -30px;
+      left: -30px;
+    }
+
+    .tool-info {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tool-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(196, 112, 63, 0.08);
+      padding: 0.3em 0.75em;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .tool-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+
+    .tool-desc {
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-features {
+      list-style: none;
+      margin-bottom: 1.75rem;
+    }
+
+    .tool-features li {
+      font-size: 0.825rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .tool-features li::before {
+      content: '/';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    .tool-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tool-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.7em 1.5em;
+      font-size: 0.825rem;
+      font-weight: 500;
+      font-family: var(--font);
+      color: #fff;
+      background: var(--color-text);
+      border: none;
+      border-radius: 100px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tool-download-btn:hover {
+      background: #333;
+    }
+
+    .tool-download-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .tool-secondary-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      transition: border-color 0.2s;
+    }
+
+    .tool-secondary-link:hover {
+      border-color: var(--color-text-secondary);
+    }
+
+    /* Install steps (collapsible) */
+
+    .install-section {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--color-border-light);
+      padding-top: 1.25rem;
+    }
+
+    .install-toggle {
+      font-family: var(--font);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .install-toggle:hover {
+      color: var(--color-text);
+    }
+
+    .install-toggle .chevron {
+      transition: transform 0.2s;
+      font-size: 0.7rem;
+    }
+
+    .install-toggle.open .chevron {
+      transform: rotate(90deg);
+    }
+
+    .install-steps {
+      display: none;
+      margin-top: 1rem;
+      padding-left: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .install-steps.visible {
+      display: block;
+    }
+
+    .install-steps li {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      padding: 0.4rem 0 0.4rem 2rem;
+      position: relative;
+      counter-increment: step;
+    }
+
+    .install-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      background: var(--color-bg-warm);
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0.45rem;
+    }
+
+    .install-steps code {
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      background: var(--color-bg-warm);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
     /* ─── Footer ─── */
 
     footer {
@@ -531,6 +799,18 @@
       .article-formats {
         justify-content: flex-start;
       }
+
+      .tool-card {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-info {
+        padding: 2rem;
+      }
+
+      .tool-visual {
+        min-height: 200px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -538,7 +818,7 @@
         padding: 6.5rem 1.25rem 0;
       }
 
-      .nav-inner, .pillars, .section, .visual-break, .footer-inner {
+      .nav-inner, .pillars, .section, .visual-break, .footer-inner, .tools-section {
         padding-left: 1.25rem;
         padding-right: 1.25rem;
       }
@@ -578,6 +858,7 @@
       <ul class="nav-links">
         <li><a href="#pillars">Approach</a></li>
         <li><a href="#articles">Articles</a></li>
+        <li><a href="#tools">Tools</a></li>
         <li><a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
     </div>
@@ -669,7 +950,7 @@
       <div class="articles-list">
 
         <!-- #001 -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=001-unconscious-consumer-behavior">
           <div class="article-num">#001</div>
           <div class="article-body">
             <h2 class="article-title">Why Consumers Unconsciously Mislead Us</h2>
@@ -685,14 +966,13 @@
               <span class="article-tag">Consumer Behavior</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/001-unconscious-consumer-behavior.md" class="article-format-link">Article ↗</a>
-              <a href="./assets/001-unconscious-consumer-behavior.pdf" class="article-format-link">PDF ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- #002 -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=002-measurement-fundamentals">
           <div class="article-num">#002</div>
           <div class="article-body">
             <h2 class="article-title">The Science of Proper Measurement</h2>
@@ -708,14 +988,13 @@
               <span class="article-tag">Survey Design</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/002-measurement-fundamentals.md" class="article-format-link">Article ↗</a>
-              <a href="./assets/002-research-edge-series-measurement-fundamentals.pdf" class="article-format-link">PDF ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- #003 -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=003-sample-size-paradox">
           <div class="article-num">#003</div>
           <div class="article-body">
             <h2 class="article-title">The Sample Size Paradox</h2>
@@ -731,14 +1010,13 @@
               <span class="article-tag">Statistics</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/003-sample-size-paradox.md" class="article-format-link">Article ↗</a>
-              <a href="./assets/Sample%20Precision.pdf" class="article-format-link">PDF ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- #003 Supplement -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=003-supplement-taxi-experiment">
           <div class="article-num">#003<span class="supplement-badge">Suppl.</span></div>
           <div class="article-body">
             <h2 class="article-title">Can 300 Taxi Rides Represent a Million Rides?</h2>
@@ -754,14 +1032,13 @@
               <span class="article-tag">CLT</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/003-supplement-taxi-experiment.md" class="article-format-link">Article ↗</a>
-              <a href="./assets/003-supplement-taxi-experiment/efficient_taxi_sampling.py" class="article-format-link">Code ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- #004 -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=004-the-trait-trap">
           <div class="article-num">#004</div>
           <div class="article-body">
             <h2 class="article-title">The Trait Trap</h2>
@@ -777,14 +1054,13 @@
               <span class="article-tag">Business Research</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/004-the-trait-trap.md" class="article-format-link">Article ↗</a>
-              <a href="./assets/004%20The%20Trait%20Trap.pdf" class="article-format-link">PDF ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- #005 -->
-        <div class="article-row">
+        <a class="article-row" href="./article.html?id=005-ai-qualitative-analysis">
           <div class="article-num">#005</div>
           <div class="article-body">
             <h2 class="article-title">AI and the Qualitative Analysis Problem</h2>
@@ -800,10 +1076,10 @@
               <span class="article-tag">Qualitative Methods</span>
             </div>
             <div class="article-formats">
-              <a href="./articles/005-ai-qualitative-analysis.md" class="article-format-link">Article ↗</a>
+              <span class="article-format-link">Read article &rarr;</span>
             </div>
           </div>
-        </div>
+        </a>
 
       </div>
     </div>
@@ -818,6 +1094,70 @@
       <ellipse cx="1200" cy="70" rx="80" ry="35" fill="#e8cbb8" opacity="0.1"/>
     </svg>
   </div>
+
+  <!-- Tools & Solutions -->
+  <section class="tools-section" id="tools">
+    <div class="section-header">
+      <span class="section-label">Tools &amp; Solutions</span>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-visual">
+        <div class="tool-visual-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div class="tool-visual-label">Claude Skill</div>
+      </div>
+
+      <div class="tool-info">
+        <div class="tool-badge">Claude Skill</div>
+        <h2 class="tool-title">Qualitative Text Analysis</h2>
+        <p class="tool-desc">
+          A structured qualitative analysis pipeline for Claude. Analyzes interview transcripts, focus groups, survey responses, and other unstructured text using rigorous methods — grounded theory coding, thematic analysis, and six-lens pattern detection. Produces traceable, auditable output instead of summaries.
+        </p>
+
+        <ul class="tool-features">
+          <li>Open coding with hierarchical tags (Domain / Category / Subcategory)</li>
+          <li>Theme construction with inclusion and exclusion boundaries</li>
+          <li>Six pattern lenses: similarity, difference, frequency, sequence, correspondence, causation</li>
+          <li>Cross-case participant matrix and typology detection</li>
+          <li>Full traceability — every quote verbatim, every code linked to source</li>
+          <li>Outputs 6 files: summary, themes, patterns, coding log, JSON data</li>
+        </ul>
+
+        <div class="tool-actions">
+          <a href="./claude-skills/qual-analysis.zip" download class="tool-download-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Skill
+          </a>
+          <a href="./article.html?id=005-ai-qualitative-analysis" class="tool-secondary-link">Read companion article</a>
+        </div>
+
+        <div class="install-section">
+          <button class="install-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('visible');">
+            <span class="chevron">&#9654;</span> How to install
+          </button>
+          <ol class="install-steps">
+            <li>Download the <code>qual-analysis.zip</code> file using the button above</li>
+            <li>Open <strong>Claude</strong> (claude.ai or Claude desktop app)</li>
+            <li>Navigate to <strong>Settings &rarr; Capabilities &rarr; Skills</strong></li>
+            <li>Upload the skill file from the downloaded zip</li>
+            <li>Provide your qualitative data (paste text, attach file, or point to a path) and ask Claude to analyze it</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
