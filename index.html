@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Edge Series — Vinay Thakur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #faf9f7;
+      --color-surface: #ffffff;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #5c5c5c;
+      --color-text-tertiary: #8a8a8a;
+      --color-accent: #c4703f;
+      --color-border: #e8e5e0;
+      --color-border-light: #f0ede8;
+      --color-tag-bg: #f3f0eb;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* ─── Navigation ─── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 249, 247, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--color-accent);
+      margin: 0 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* ─── Hero ─── */
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10rem 2rem 4rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title .slash {
+      color: var(--color-accent);
+      font-weight: 300;
+      margin: 0 0.05em;
+      display: inline-block;
+    }
+
+    .hero-title .edge {
+      font-style: italic;
+    }
+
+    .hero-intro {
+      max-width: 620px;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-byline {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-byline a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      transition: border-color 0.2s;
+    }
+
+    .hero-byline a:hover {
+      border-color: var(--color-text-secondary);
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--color-accent);
+      margin-top: 3rem;
+    }
+
+    /* ─── Section ─── */
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+    }
+
+    .section-count {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+    }
+
+    /* ─── Articles Grid ─── */
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: 8px;
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+      position: relative;
+    }
+
+    .article-card:hover {
+      border-color: var(--color-border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .article-number {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .article-excerpt {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .article-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .article-tag {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      background: var(--color-tag-bg);
+      padding: 0.2em 0.6em;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+    }
+
+    .article-date {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--color-text-tertiary);
+      white-space: nowrap;
+    }
+
+    .article-formats {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .article-format-link {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      transition: opacity 0.2s;
+    }
+
+    .article-format-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ─── Supplement Card Variant ─── */
+
+    .article-card.supplement {
+      border-left: 3px solid var(--color-accent);
+    }
+
+    /* ─── Principles ─── */
+
+    .principles {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .principle {
+      padding: 0;
+    }
+
+    .principle-marker {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .principle-title {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.01em;
+    }
+
+    .principle-text {
+      font-family: var(--font-sans);
+      font-size: 0.825rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+    }
+
+    /* ─── Footer ─── */
+
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-left span {
+      color: var(--color-accent);
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-right a {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover {
+      color: var(--color-text);
+    }
+
+    /* ─── Responsive ─── */
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 8rem 1.5rem 3rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
+      }
+
+      .hero-intro {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── Smooth scroll ─── */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ─── Selection ─── */
+    ::selection {
+      background: rgba(196, 112, 63, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">R<span>/</span>E Series</a>
+      <ul class="nav-links">
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#principles">Approach</a></li>
+        <li><a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="hero-title">
+      Research<span class="slash">/</span><span class="edge">Edge</span><br>Series
+    </h1>
+    <p class="hero-intro">
+      Evidence-based guidance for researchers who want to move beyond casual data collection to rigorous research practice. Each installment dissects a fundamental methodological challenge — the kind that quietly destroys research validity.
+    </p>
+    <p class="hero-byline">
+      By <a href="https://github.com/vtmade">Vinay Thakur</a> · #vtmade
+    </p>
+    <div class="hero-divider"></div>
+  </header>
+
+  <!-- Principles -->
+  <section class="principles" id="principles">
+    <div class="section-header">
+      <span class="section-label">Approach</span>
+    </div>
+    <div class="principles-grid">
+      <div class="principle">
+        <div class="principle-marker">/01</div>
+        <div class="principle-title">Theoretical Rigor</div>
+        <p class="principle-text">Every recommendation grounded in established research methodology, not opinion.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-marker">/02</div>
+        <div class="principle-title">Practical Application</div>
+        <p class="principle-text">Complex concepts made tangible through real-world examples and decision frameworks.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-marker">/03</div>
+        <div class="principle-title">Error Prevention</div>
+        <p class="principle-text">Focus on avoiding systematic biases that compound silently across studies.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-marker">/04</div>
+        <div class="principle-title">Actionable Insights</div>
+        <p class="principle-text">Move from "interesting findings" to strategic decisions that withstand scrutiny.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section class="section" id="articles">
+    <div class="section-header">
+      <span class="section-label">Published Articles</span>
+      <span class="section-count">6 entries</span>
+    </div>
+
+    <div class="articles-grid">
+
+      <!-- #001 -->
+      <div class="article-card">
+        <div class="article-number">#001</div>
+        <h2 class="article-title">Why Consumers Unconsciously Mislead Us</h2>
+        <p class="article-subtitle">Understanding Post-Hoc Rationalization in Consumer Research</p>
+        <p class="article-excerpt">
+          Consumers do not have conscious access to their decision-making processes. Direct "why" questions fail — expert researchers use perception association methods to uncover real decision drivers.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">System 1 & 2</span>
+            <span class="article-tag">Consumer Behavior</span>
+          </div>
+          <span class="article-date">Aug 2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/001-unconscious-consumer-behavior.md" class="article-format-link">Article ↗</a>
+          <a href="./assets/001-unconscious-consumer-behavior.pdf" class="article-format-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <!-- #002 -->
+      <div class="article-card">
+        <div class="article-number">#002</div>
+        <h2 class="article-title">The Science of Proper Measurement</h2>
+        <p class="article-subtitle">Moving Beyond Casual Surveys to Rigorous Research Design</p>
+        <p class="article-excerpt">
+          Most research fails before data collection begins. Measurement model misspecification can inflate findings by 400%. Learn the distinction between reflective and formative constructs.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">Measurement</span>
+            <span class="article-tag">Survey Design</span>
+          </div>
+          <span class="article-date">Aug 2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/002-measurement-fundamentals.md" class="article-format-link">Article ↗</a>
+          <a href="./assets/002-research-edge-series-measurement-fundamentals.pdf" class="article-format-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <!-- #003 -->
+      <div class="article-card">
+        <div class="article-number">#003</div>
+        <h2 class="article-title">The Sample Size Paradox</h2>
+        <p class="article-subtitle">Why Statistical Precision Trumps Intuitive Mathematics</p>
+        <p class="article-excerpt">
+          Population size bears minimal relationship to required sample sizes. Precision requirements — not population counts — should drive sampling decisions. Validated against WHO and UNICEF standards.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">Sampling</span>
+            <span class="article-tag">Statistics</span>
+          </div>
+          <span class="article-date">Sep 2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/003-sample-size-paradox.md" class="article-format-link">Article ↗</a>
+          <a href="./assets/Sample%20Precision.pdf" class="article-format-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <!-- #003-Supplement -->
+      <div class="article-card supplement">
+        <div class="article-number">#003 — Supplement</div>
+        <h2 class="article-title">Can 300 Taxi Rides Represent a Million Rides?</h2>
+        <p class="article-subtitle">Experimental Validation Using Real NYC Taxi Data</p>
+        <p class="article-excerpt">
+          Real-world validation using 1 million NYC taxi transactions. Dramatic accuracy improvements from n=30 to n=300, diminishing returns beyond n=500, and 98% accuracy across all sample sizes.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">Experiment</span>
+            <span class="article-tag">CLT</span>
+          </div>
+          <span class="article-date">Sep 2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/003-supplement-taxi-experiment.md" class="article-format-link">Article ↗</a>
+          <a href="./assets/003-supplement-taxi-experiment/efficient_taxi_sampling.py" class="article-format-link">Code ↗</a>
+        </div>
+      </div>
+
+      <!-- #004 -->
+      <div class="article-card">
+        <div class="article-number">#004</div>
+        <h2 class="article-title">The Trait Trap</h2>
+        <p class="article-subtitle">Why Copying Successful Companies Usually Fails</p>
+        <p class="article-excerpt">
+          Business advice confuses correlation with causation. Learn to distinguish anecdotal pattern-matching from rigorous causal analysis using regression, statistical controls, and propensity score matching.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">Causation</span>
+            <span class="article-tag">Business Research</span>
+          </div>
+          <span class="article-date">2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/004-the-trait-trap.md" class="article-format-link">Article ↗</a>
+          <a href="./assets/004%20The%20Trait%20Trap.pdf" class="article-format-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <!-- #005 -->
+      <div class="article-card">
+        <div class="article-number">#005</div>
+        <h2 class="article-title">AI and the Qualitative Analysis Problem</h2>
+        <p class="article-subtitle">Why Most AI Tools Flatten Qualitative Data</p>
+        <p class="article-excerpt">
+          AI summaries of qualitative data look useful but fall apart under scrutiny. Rigorous analysis requires coding, theme construction, pattern detection, and cross-case analysis — not summarization.
+        </p>
+        <div class="article-meta">
+          <div class="article-tags">
+            <span class="article-tag">AI</span>
+            <span class="article-tag">Qualitative Methods</span>
+          </div>
+          <span class="article-date">2025</span>
+        </div>
+        <div class="article-formats">
+          <a href="./articles/005-ai-qualitative-analysis.md" class="article-format-link">Article ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      Research<span>/</span>Edge Series · Vinay Thakur · 2025
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
+      <a href="https://github.com/vtmade" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+</body>
+</html>
