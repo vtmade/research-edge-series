@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading... — Research/Edge Series</title>
+  <title>Loading... — R.edge</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23191919'/><text x='4' y='23' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='16' fill='%23c4703f'>R.</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     *,
@@ -73,8 +74,10 @@
     }
 
     .nav-logo {
-      font-weight: 500;
+      font-family: 'Helvetica Neue', 'Montserrat', 'Inter', Helvetica, Arial, sans-serif;
+      font-weight: 900;
       font-size: 0.9rem;
+      text-transform: lowercase;
       color: var(--color-text);
       text-decoration: none;
     }
@@ -503,7 +506,7 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-inner">
-      <a href="./index.html" class="nav-logo">Research<span class="sep">/</span>Edge</a>
+      <a href="./index.html" class="nav-logo">research edge<span class="sep"> /</span></a>
       <ul class="nav-links">
         <li><a href="./index.html#pillars">Approach</a></li>
         <li><a href="./index.html#articles">Articles</a></li>
@@ -539,7 +542,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
-        Research<span class="sep">/</span>Edge Series&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2025
+        research edge<span class="sep"> /</span>&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2026
       </div>
       <div class="footer-right">
         <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
@@ -556,7 +559,7 @@
         num: '#001',
         title: 'Why Consumers Unconsciously Mislead Us',
         subtitle: 'Understanding Post-Hoc Rationalization in Consumer Research',
-        date: 'August 2025',
+        date: 'August 2026',
         pdf: './assets/001-unconscious-consumer-behavior.pdf'
       },
       {
@@ -564,7 +567,7 @@
         num: '#002',
         title: 'The Science of Proper Measurement',
         subtitle: 'Moving Beyond Casual Surveys to Rigorous Research Design',
-        date: 'August 2025',
+        date: 'August 2026',
         pdf: './assets/002-research-edge-series-measurement-fundamentals.pdf'
       },
       {
@@ -572,7 +575,7 @@
         num: '#003',
         title: 'The Sample Size Paradox',
         subtitle: 'Why Statistical Precision Trumps Intuitive Mathematics',
-        date: 'September 2025',
+        date: 'September 2026',
         pdf: './assets/Sample%20Precision.pdf'
       },
       {
@@ -580,7 +583,7 @@
         num: '#003 — Supplement',
         title: 'Can 300 Taxi Rides Represent a Million Rides?',
         subtitle: 'Experimental Validation Using Real NYC Taxi Data',
-        date: 'September 2025',
+        date: 'September 2026',
         pdf: null
       },
       {
@@ -588,7 +591,7 @@
         num: '#004',
         title: 'The Trait Trap',
         subtitle: 'Why Copying Successful Companies Usually Fails',
-        date: '2025',
+        date: '2026',
         pdf: './assets/004%20The%20Trait%20Trap.pdf'
       },
       {
@@ -596,7 +599,7 @@
         num: '#005',
         title: 'AI and the Qualitative Analysis Problem',
         subtitle: 'Why Most AI Tools Flatten Qualitative Data',
-        date: '2025',
+        date: 'April 2026',
         pdf: null
       }
     ];
@@ -625,7 +628,7 @@
       document.getElementById('article-hero-img').classList.add(imgClasses[currentIndex % imgClasses.length]);
 
       // Populate header
-      document.title = article.title + ' — Research/Edge Series';
+      document.title = article.title + ' — R.edge';
       document.getElementById('article-num-label').textContent = article.num;
       document.getElementById('article-hero-title').textContent = article.title;
       document.getElementById('article-hero-subtitle').textContent = article.subtitle;
