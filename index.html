@@ -189,19 +189,60 @@
       border-color: #ccc;
     }
 
-    /* ─── Abstract Visual Break 1 ─── */
+    /* ─── Abstract Image Panels ─── */
 
-    .visual-break {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 4rem 3rem;
-      overflow: hidden;
+    .img-panel {
+      width: 100%;
+      height: 280px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    .visual-break svg {
-      width: 100%;
-      height: auto;
-      display: block;
+    .img-panel-contained {
+      max-width: 1280px;
+      margin: 2rem auto;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Image 1: warm orange glow */
+    .img-orange-glow {
+      background:
+        url('./assets/images/abstract-1.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 48% 45%, #f5a623 0%, #f7931e 25%, #e8a86b 45%, #d4c8bd 70%, #c9cdd0 100%);
+    }
+
+    /* Image 2: pink-purple diagonal sweep */
+    .img-pink-sweep {
+      background:
+        url('./assets/images/abstract-2.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #a8d4e6 0%, #9b8ec4 25%, #d946a8 50%, #f06292 75%, #f8bbd0 100%);
+    }
+
+    /* Image 3: teal splatter on cream */
+    .img-teal-splatter {
+      background:
+        url('./assets/images/abstract-3.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
+    }
+
+    /* Image 4: coral-teal watercolor */
+    .img-coral-watercolor {
+      background:
+        url('./assets/images/abstract-4.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 60% 30%, #e8a88a 0%, #f0d8d0 25%, #ffffff 45%, #b8dce8 70%, #a0d0d8 100%);
+    }
+
+    /* Image 5: teal-gold fluid */
+    .img-teal-gold {
+      background:
+        url('./assets/images/abstract-5.jpg') center/cover no-repeat,
+        linear-gradient(160deg, #6bb8a0 0%, #8cc8a0 20%, #c8c878 45%, #d4a850 65%, #60b8b0 100%);
     }
 
     /* ─── Pillars / Colored Blocks (Anthropic-style) ─── */
@@ -263,18 +304,6 @@
       color: rgba(25, 25, 25, 0.4);
       margin-bottom: auto;
       padding-bottom: 1rem;
-    }
-
-    /* ─── Abstract Visual Break 2 ─── */
-
-    .visual-break-2 {
-      padding: 2rem 0 0;
-      background: var(--color-bg);
-    }
-
-    .visual-break-2 svg {
-      width: 100%;
-      display: block;
     }
 
     /* ─── Articles Section ─── */
@@ -436,20 +465,6 @@
       vertical-align: middle;
     }
 
-    /* ─── Full-width abstract band ─── */
-
-    .abstract-band {
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-    }
-
-    .abstract-band svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
     /* ─── Tools Section ─── */
 
     .tools-section {
@@ -469,7 +484,9 @@
     }
 
     .tool-visual {
-      background: linear-gradient(135deg, var(--warm-sand) 0%, var(--soft-terracotta) 50%, var(--blush) 100%);
+      background:
+        url('./assets/images/abstract-3.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
       padding: 3rem;
       display: flex;
       flex-direction: column;
@@ -483,13 +500,16 @@
     .tool-visual-icon {
       width: 80px;
       height: 80px;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.65);
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 1;
     }
 
     .tool-visual-icon svg {
@@ -502,32 +522,14 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(25, 25, 25, 0.5);
-    }
-
-    /* floating decorative shapes on tool visual */
-    .tool-visual::before,
-    .tool-visual::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.15;
-    }
-
-    .tool-visual::before {
-      width: 200px;
-      height: 200px;
-      background: white;
-      top: -40px;
-      right: -40px;
-    }
-
-    .tool-visual::after {
-      width: 150px;
-      height: 150px;
-      background: white;
-      bottom: -30px;
-      left: -30px;
+      color: rgba(25, 25, 25, 0.6);
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.25em 0.75em;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .tool-info {
@@ -774,9 +776,14 @@
         padding-top: 0;
       }
 
-      .nav-inner, .pillars, .section, .visual-break, .footer-inner {
+      .nav-inner, .pillars, .section, .footer-inner {
         padding-left: 2rem;
         padding-right: 2rem;
+      }
+
+      .img-panel-contained {
+        margin-left: 2rem;
+        margin-right: 2rem;
       }
 
       .pillars-grid {
@@ -818,9 +825,20 @@
         padding: 6.5rem 1.25rem 0;
       }
 
-      .nav-inner, .pillars, .section, .visual-break, .footer-inner, .tools-section {
+      .nav-inner, .pillars, .section, .footer-inner, .tools-section {
         padding-left: 1.25rem;
         padding-right: 1.25rem;
+      }
+
+      .img-panel-contained {
+        margin-left: 1.25rem;
+        margin-right: 1.25rem;
+        border-radius: 10px;
+        height: 180px;
+      }
+
+      .img-panel {
+        height: 200px;
       }
 
       .nav-links { display: none; }
@@ -882,18 +900,8 @@
     </div>
   </header>
 
-  <!-- Abstract Visual Break 1 — flowing topology -->
-  <div class="visual-break">
-    <svg viewBox="0 0 1280 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M0 120 C160 60, 320 160, 480 100 C640 40, 800 140, 960 80 C1120 20, 1200 100, 1280 70" stroke="#e8cbb8" stroke-width="1.5" fill="none" opacity="0.7"/>
-      <path d="M0 140 C200 80, 400 180, 600 110 C800 40, 1000 150, 1280 90" stroke="#d4ddd2" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M0 100 C180 160, 360 40, 540 120 C720 200, 900 60, 1280 130" stroke="#d0dde8" stroke-width="1" fill="none" opacity="0.5"/>
-      <circle cx="480" cy="100" r="40" fill="#f0e6d3" opacity="0.25"/>
-      <circle cx="820" cy="75" r="55" fill="#d4ddd2" opacity="0.2"/>
-      <circle cx="200" cy="130" r="30" fill="#d0dde8" opacity="0.2"/>
-      <circle cx="1100" cy="90" r="35" fill="#ddd5e8" opacity="0.2"/>
-    </svg>
-  </div>
+  <!-- Visual Break 1 — orange glow -->
+  <div class="img-panel-contained img-orange-glow" role="img" aria-hidden="true"></div>
 
   <!-- Approach Pillars — colored blocks like Anthropic -->
   <section class="pillars" id="pillars">
@@ -930,14 +938,8 @@
     </div>
   </section>
 
-  <!-- Full-width abstract band — layered organic shapes -->
-  <div class="abstract-band">
-    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M0,64 C360,128 720,0 1080,80 C1260,120 1380,40 1440,64 L1440,160 L0,160 Z" fill="#f9f7f4"/>
-      <path d="M0,96 C240,48 480,144 720,80 C960,16 1200,112 1440,80 L1440,160 L0,160 Z" fill="#f0e6d3" opacity="0.3"/>
-      <path d="M0,120 C320,80 640,140 960,100 C1120,80 1280,130 1440,110 L1440,160 L0,160 Z" fill="#d4ddd2" opacity="0.2"/>
-    </svg>
-  </div>
+  <!-- Visual Break 2 — pink-purple sweep -->
+  <div class="img-panel img-pink-sweep" role="img" aria-hidden="true"></div>
 
   <!-- Articles -->
   <section class="section" id="articles" style="background: var(--color-bg-warm); margin: 0 auto; max-width: none; padding-bottom: 4rem;">
@@ -1085,15 +1087,8 @@
     </div>
   </section>
 
-  <!-- Abstract bottom band -->
-  <div class="abstract-band">
-    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M0,0 L0,40 C240,80 480,10 720,50 C960,90 1200,20 1440,60 L1440,0 Z" fill="#f9f7f4"/>
-      <ellipse cx="360" cy="60" rx="120" ry="50" fill="#d0dde8" opacity="0.12"/>
-      <ellipse cx="900" cy="50" rx="100" ry="45" fill="#ddd5e8" opacity="0.1"/>
-      <ellipse cx="1200" cy="70" rx="80" ry="35" fill="#e8cbb8" opacity="0.1"/>
-    </svg>
-  </div>
+  <!-- Visual Break 3 — coral-teal watercolor -->
+  <div class="img-panel img-coral-watercolor" role="img" aria-hidden="true"></div>
 
   <!-- Tools & Solutions -->
   <section class="tools-section" id="tools">
@@ -1158,6 +1153,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Visual Break 4 — teal-gold fluid -->
+  <div class="img-panel-contained img-teal-gold" role="img" aria-hidden="true"></div>
 
   <!-- Footer -->
   <footer>
