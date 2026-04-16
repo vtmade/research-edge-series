@@ -101,12 +101,45 @@
       color: var(--color-text);
     }
 
+    /* ─── Article Hero Image ─── */
+
+    .article-hero-img {
+      width: 100%;
+      height: 220px;
+      margin-top: 56px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Rotate images per article (assigned via JS) */
+    .article-img-1 {
+      background: url('./assets/images/abstract-1.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 48% 45%, #f5a623 0%, #f7931e 25%, #e8a86b 45%, #d4c8bd 70%, #c9cdd0 100%);
+    }
+    .article-img-2 {
+      background: url('./assets/images/abstract-2.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #a8d4e6 0%, #9b8ec4 25%, #d946a8 50%, #f06292 75%, #f8bbd0 100%);
+    }
+    .article-img-3 {
+      background: url('./assets/images/abstract-3.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
+    }
+    .article-img-4 {
+      background: url('./assets/images/abstract-4.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 60% 30%, #e8a88a 0%, #f0d8d0 25%, #ffffff 45%, #b8dce8 70%, #a0d0d8 100%);
+    }
+    .article-img-5 {
+      background: url('./assets/images/abstract-5.jpg') center/cover no-repeat,
+        linear-gradient(160deg, #6bb8a0 0%, #8cc8a0 20%, #c8c878 45%, #d4a850 65%, #60b8b0 100%);
+    }
+
     /* ─── Article Header ─── */
 
     .article-header {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 8rem 3rem 3rem;
+      padding: 3rem 3rem 3rem;
     }
 
     .article-back {
@@ -440,8 +473,11 @@
     /* ─── Responsive ─── */
 
     @media (max-width: 768px) {
+      .article-hero-img {
+        height: 160px;
+      }
       .article-header {
-        padding: 7rem 1.5rem 2rem;
+        padding: 2rem 1.5rem 2rem;
       }
       .article-content {
         padding: 2rem 1.5rem 4rem;
@@ -476,6 +512,9 @@
       </ul>
     </div>
   </nav>
+
+  <!-- Article Hero Image (set by JS) -->
+  <div class="article-hero-img" id="article-hero-img" role="img" aria-hidden="true"></div>
 
   <!-- Article Header (populated by JS) -->
   <header class="article-header" id="article-header">
@@ -568,7 +607,11 @@
     const currentIndex = articles.findIndex(a => a.id === articleId);
     const article = articles[currentIndex];
 
+    // Image class rotation for articles
+    const imgClasses = ['article-img-1', 'article-img-2', 'article-img-3', 'article-img-4', 'article-img-5'];
+
     if (!article) {
+      document.getElementById('article-hero-img').style.display = 'none';
       document.getElementById('article-header').style.display = 'none';
       document.querySelector('.header-divider').style.display = 'none';
       document.getElementById('article-content').innerHTML = `
@@ -578,6 +621,9 @@
         </div>
       `;
     } else {
+      // Set hero image based on article index
+      document.getElementById('article-hero-img').classList.add(imgClasses[currentIndex % imgClasses.length]);
+
       // Populate header
       document.title = article.title + ' — Research/Edge Series';
       document.getElementById('article-num-label').textContent = article.num;
