@@ -8,18 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --color-bg: #ffffff;
       --color-bg-warm: #f9f7f4;
-      --color-surface: #ffffff;
       --color-text: #191919;
       --color-text-secondary: #555555;
       --color-text-tertiary: #888888;
@@ -27,583 +20,345 @@
       --color-border: #e5e5e5;
       --color-border-light: #efefef;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-
-      /* palette for accent blocks */
       --warm-sand: #f0e6d3;
-      --soft-terracotta: #e8cbb8;
       --muted-sage: #d4ddd2;
       --pale-sky: #d0dde8;
       --light-lavender: #ddd5e8;
-      --blush: #e8d0d0;
     }
 
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+    ::selection { background: rgba(196,112,63,0.15); }
 
-    body {
-      font-family: var(--font);
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-    }
-
-    ::selection {
-      background: rgba(196, 112, 63, 0.15);
-    }
-
-    /* ─── Navigation ─── */
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--color-border-light);
-    }
-
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 3rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--color-text);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-logo .sep {
-      color: var(--color-accent);
-      margin: 0 0.1em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.25rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.825rem;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--color-text);
-    }
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border-light); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 3rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: none; }
+    .nav-logo .sep { color: var(--color-accent); margin: 0 0.1em; }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-size: 0.825rem; font-weight: 400; color: var(--color-text-secondary); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-text); }
 
     /* ─── Hero ─── */
+    .hero { max-width: 1280px; margin: 0 auto; padding: 9rem 3rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .hero-left { padding-top: 1rem; }
+    .hero-title { font-weight: 600; font-size: clamp(3.2rem, 6.5vw, 5rem); line-height: 1.0; letter-spacing: -0.035em; }
+    .hero-title .slash { color: var(--color-accent); font-weight: 400; }
+    .hero-right { padding-top: 2.2rem; }
+    .hero-intro { font-size: 1.05rem; font-weight: 400; line-height: 1.7; color: var(--color-text-secondary); max-width: 480px; margin-bottom: 1.75rem; }
+    .hero-byline { font-size: 0.825rem; color: var(--color-text-tertiary); }
+    .hero-byline a { color: var(--color-text-secondary); text-decoration: none; border-bottom: 1px solid var(--color-border); transition: border-color 0.2s; }
+    .hero-byline a:hover { border-color: var(--color-text-secondary); }
+    .hero-cta { display: inline-flex; align-items: center; gap: 0.5em; margin-top: 1.75rem; padding: 0.7em 1.5em; font-size: 0.825rem; font-weight: 500; color: var(--color-text); border: 1px solid var(--color-border); border-radius: 100px; text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+    .hero-cta:hover { background: var(--color-bg-warm); border-color: #ccc; }
 
-    .hero {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 9rem 3rem 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .hero-left {
-      padding-top: 1rem;
-    }
-
-    .hero-title {
-      font-weight: 600;
-      font-size: clamp(3.2rem, 6.5vw, 5rem);
-      line-height: 1.0;
-      letter-spacing: -0.035em;
-      color: var(--color-text);
-    }
-
-    .hero-title .slash {
-      color: var(--color-accent);
-      font-weight: 400;
-    }
-
-    .hero-right {
-      padding-top: 2.2rem;
-    }
-
-    .hero-intro {
-      font-size: 1.05rem;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--color-text-secondary);
-      max-width: 480px;
-      margin-bottom: 1.75rem;
-    }
-
-    .hero-byline {
-      font-size: 0.825rem;
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-    }
-
-    .hero-byline a {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--color-border);
-      transition: border-color 0.2s;
-    }
-
-    .hero-byline a:hover {
-      border-color: var(--color-text-secondary);
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5em;
-      margin-top: 1.75rem;
-      padding: 0.7em 1.5em;
-      font-size: 0.825rem;
-      font-weight: 500;
-      color: var(--color-text);
-      border: 1px solid var(--color-border);
-      border-radius: 100px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .hero-cta:hover {
-      background: var(--color-bg-warm);
-      border-color: #ccc;
-    }
-
-    /* ─── Abstract Image Panels ─── */
-
-    .img-panel {
-      width: 100%;
-      height: 280px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .img-panel-contained {
-      max-width: 1280px;
-      margin: 2rem auto;
-      border-radius: 16px;
-      overflow: hidden;
-      height: 240px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    /* Image 1: warm orange glow */
-    .img-orange-glow {
-      background:
-        url('./assets/images/abstract-1.jpg') center/cover no-repeat,
+    /* ─── Hero Image (below title) ─── */
+    .hero-img { max-width: 1280px; margin: 2.5rem auto 0; padding: 0 3rem; }
+    .hero-img-inner {
+      width: 100%; height: 320px; border-radius: 16px; overflow: hidden;
+      background: url('./assets/images/abstract-1.jpg') center/cover no-repeat,
         radial-gradient(ellipse at 48% 45%, #f5a623 0%, #f7931e 25%, #e8a86b 45%, #d4c8bd 70%, #c9cdd0 100%);
     }
 
-    /* Image 2: pink-purple diagonal sweep */
-    .img-pink-sweep {
-      background:
-        url('./assets/images/abstract-2.jpg') center/cover no-repeat,
-        linear-gradient(135deg, #a8d4e6 0%, #9b8ec4 25%, #d946a8 50%, #f06292 75%, #f8bbd0 100%);
-    }
-
-    /* Image 3: teal splatter on cream */
-    .img-teal-splatter {
-      background:
-        url('./assets/images/abstract-3.jpg') center/cover no-repeat,
-        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
-    }
-
-    /* Image 4: coral-teal watercolor */
-    .img-coral-watercolor {
-      background:
-        url('./assets/images/abstract-4.jpg') center/cover no-repeat,
-        radial-gradient(ellipse at 60% 30%, #e8a88a 0%, #f0d8d0 25%, #ffffff 45%, #b8dce8 70%, #a0d0d8 100%);
-    }
-
-    /* Image 5: teal-gold fluid */
-    .img-teal-gold {
-      background:
-        url('./assets/images/abstract-5.jpg') center/cover no-repeat,
-        linear-gradient(160deg, #6bb8a0 0%, #8cc8a0 20%, #c8c878 45%, #d4a850 65%, #60b8b0 100%);
-    }
-
-    /* ─── Pillars / Colored Blocks (Anthropic-style) ─── */
-
-    .pillars {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 3rem 4rem;
-    }
-
-    .pillars-header {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-text-tertiary);
-      margin-bottom: 1.5rem;
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .pillar-card {
-      border-radius: 12px;
-      padding: 1.75rem;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
+    /* ─── Pillars ─── */
+    .pillars { max-width: 1280px; margin: 0 auto; padding: 3rem 3rem 4rem; }
+    .pillars-header { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1.5rem; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .pillar-card { border-radius: 12px; padding: 1.75rem; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; }
     .pillar-card:nth-child(1) { background: var(--warm-sand); }
     .pillar-card:nth-child(2) { background: var(--muted-sage); }
     .pillar-card:nth-child(3) { background: var(--pale-sky); }
     .pillar-card:nth-child(4) { background: var(--light-lavender); }
+    .pillar-num { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; color: rgba(25,25,25,0.4); margin-bottom: auto; padding-bottom: 1rem; }
+    .pillar-title { font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem; }
+    .pillar-text { font-size: 0.825rem; font-weight: 400; line-height: 1.55; color: rgba(25,25,25,0.7); }
 
-    .pillar-title {
-      font-size: 1rem;
+    /* ─── Articles: Featured + Sidebar ─── */
+    .articles-section { max-width: 1280px; margin: 0 auto; padding: 4rem 3rem 0; }
+    .articles-section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
+    .articles-section-header .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); }
+    .articles-section-header .count { font-size: 0.7rem; color: var(--color-text-tertiary); }
+
+    .articles-featured-row {
+      display: grid;
+      grid-template-columns: 55% 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Featured article with big image */
+    .featured-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .featured-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: url('./assets/images/abstract-2.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #a8d4e6 0%, #9b8ec4 25%, #d946a8 50%, #f06292 75%, #f8bbd0 100%);
+      margin-bottom: 1.25rem;
+    }
+
+    .featured-img-title {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      color: #fff;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
       font-weight: 600;
-      color: var(--color-text);
-      letter-spacing: -0.01em;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       margin-bottom: 0.5rem;
     }
 
-    .pillar-text {
-      font-size: 0.825rem;
-      font-weight: 400;
-      line-height: 1.55;
-      color: rgba(25, 25, 25, 0.7);
-    }
-
-    .pillar-num {
+    .featured-tag {
       font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: rgba(25, 25, 25, 0.4);
-      margin-bottom: auto;
-      padding-bottom: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
     }
 
-    /* ─── Articles Section ─── */
-
-    .section {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 4rem 3rem 6rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .featured-date {
+      font-size: 0.75rem;
       color: var(--color-text-tertiary);
     }
 
-    .section-count {
-      font-size: 0.7rem;
-      font-weight: 400;
-      color: var(--color-text-tertiary);
+    .featured-excerpt {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
     }
 
-    /* ─── Article List (editorial style) ─── */
-
-    .articles-list {
+    /* Sidebar article list (right of featured) */
+    .sidebar-articles {
       display: flex;
       flex-direction: column;
     }
 
-    .article-row {
-      display: grid;
-      grid-template-columns: 80px 1fr 200px;
-      gap: 2rem;
-      align-items: start;
-      padding: 2rem 0;
+    .sidebar-item {
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--color-border-light);
       text-decoration: none;
       color: inherit;
-      transition: background 0.2s;
+      display: block;
+      transition: opacity 0.2s;
     }
 
-    .article-row:first-child {
-      border-top: none;
+    .sidebar-item:first-child { padding-top: 0; }
+    .sidebar-item:hover { opacity: 0.75; }
+
+    .sidebar-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
     }
 
-    .article-row:hover {
-      background: var(--color-bg-warm);
-      margin: 0 -1.5rem;
-      padding: 2rem 1.5rem;
-      border-radius: 8px;
+    .sidebar-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--color-text);
     }
 
-    .article-num {
+    .sidebar-date {
       font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--color-accent);
-      padding-top: 0.25rem;
+      color: var(--color-text-tertiary);
     }
 
-    .article-body {
-      flex: 1;
-    }
-
-    .article-title {
-      font-size: 1.3rem;
+    .sidebar-title {
+      font-size: 1.05rem;
       font-weight: 600;
       line-height: 1.25;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       color: var(--color-text);
       margin-bottom: 0.35rem;
     }
 
-    .article-subtitle {
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-style: italic;
+    .sidebar-excerpt {
+      font-size: 0.8rem;
+      line-height: 1.55;
       color: var(--color-text-secondary);
-      margin-bottom: 0.75rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .article-excerpt {
-      font-size: 0.85rem;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--color-text-secondary);
-      max-width: 580px;
+    /* ─── All Articles Table ─── */
+    .articles-table-section { max-width: 1280px; margin: 0 auto; padding: 0 3rem 5rem; }
+
+    .articles-table {
+      width: 100%;
+      border-collapse: collapse;
     }
 
-    .article-side {
-      text-align: right;
-      padding-top: 0.25rem;
-    }
-
-    .article-date {
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-      margin-bottom: 0.5rem;
-    }
-
-    .article-tags {
-      display: flex;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .article-tag {
+    .articles-table thead th {
       font-size: 0.65rem;
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-      background: var(--color-bg-warm);
-      padding: 0.2em 0.55em;
-      border-radius: 3px;
-    }
-
-    .article-formats {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: flex-end;
-      margin-top: 0.6rem;
-    }
-
-    .article-format-link {
-      font-size: 0.7rem;
       font-weight: 500;
-      color: var(--color-accent);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .article-format-link:hover {
-      opacity: 0.65;
-    }
-
-    .supplement-badge {
-      display: inline-block;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent);
-      border-radius: 3px;
-      padding: 0.15em 0.45em;
-      margin-left: 0.5rem;
-      vertical-align: middle;
+      color: var(--color-text-tertiary);
+      text-align: left;
+      padding: 0 0 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
     }
 
-    /* ─── Tools Section ─── */
+    .articles-table thead th:first-child { width: 140px; }
+    .articles-table thead th:nth-child(2) { width: 180px; }
 
+    .articles-table tbody tr {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .articles-table tbody tr:hover {
+      background: var(--color-bg-warm);
+    }
+
+    .articles-table tbody td {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--color-border-light);
+      vertical-align: top;
+    }
+
+    .articles-table tbody tr:hover td {
+      padding: 1rem 0.75rem;
+      margin: 0 -0.75rem;
+    }
+
+    .table-date {
+      font-size: 0.825rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .table-category {
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .table-title {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--color-text);
+    }
+
+    .table-title:hover {
+      color: var(--color-accent);
+    }
+
+    /* ─── Tools Section: list + image ─── */
     .tools-section {
       max-width: 1280px;
       margin: 0 auto;
       padding: 4rem 3rem 5rem;
     }
 
-    .tool-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-light);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .tool-visual {
-      background:
-        url('./assets/images/abstract-3.jpg') center/cover no-repeat,
-        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
-      padding: 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 320px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tool-visual-icon {
-      width: 80px;
-      height: 80px;
-      background: rgba(255, 255, 255, 0.65);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tool-visual-icon svg {
-      width: 36px;
-      height: 36px;
-    }
-
-    .tool-visual-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(25, 25, 25, 0.6);
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.5);
-      padding: 0.25em 0.75em;
-      border-radius: 4px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .tool-info {
-      padding: 2.5rem 2.5rem 2.5rem 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .tool-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      background: rgba(196, 112, 63, 0.08);
-      padding: 0.3em 0.75em;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      width: fit-content;
-    }
-
-    .tool-title {
-      font-size: 1.5rem;
+    .tools-header {
       font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--color-text);
-      margin-bottom: 0.75rem;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
     }
 
-    .tool-desc {
-      font-size: 0.9rem;
-      font-weight: 400;
-      line-height: 1.65;
+    .tools-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .tools-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-list-item {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .tool-list-item:last-child {
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .tool-list-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-list-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tool-list-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-list-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
       color: var(--color-text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      max-width: 580px;
     }
 
-    .tool-features {
+    .tool-list-features {
       list-style: none;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.25rem;
+      columns: 2;
+      column-gap: 1.5rem;
     }
 
-    .tool-features li {
-      font-size: 0.825rem;
-      font-weight: 400;
+    .tool-list-features li {
+      font-size: 0.775rem;
       color: var(--color-text-secondary);
-      padding: 0.35rem 0;
-      padding-left: 1.25rem;
+      padding: 0.2rem 0 0.2rem 1rem;
       position: relative;
+      break-inside: avoid;
     }
 
-    .tool-features li::before {
+    .tool-list-features li::before {
       content: '/';
       position: absolute;
       left: 0;
       color: var(--color-accent);
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    .tool-actions {
+    .tool-list-actions {
       display: flex;
       gap: 1rem;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .tool-download-btn {
+    .tool-dl-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5em;
-      padding: 0.7em 1.5em;
-      font-size: 0.825rem;
+      padding: 0.65em 1.4em;
+      font-size: 0.8rem;
       font-weight: 500;
       font-family: var(--font);
       color: #fff;
@@ -615,17 +370,12 @@
       transition: background 0.2s;
     }
 
-    .tool-download-btn:hover {
-      background: #333;
-    }
+    .tool-dl-btn:hover { background: #333; }
 
-    .tool-download-btn svg {
-      width: 14px;
-      height: 14px;
-    }
+    .tool-dl-btn svg { width: 13px; height: 13px; }
 
-    .tool-secondary-link {
-      font-size: 0.8rem;
+    .tool-link {
+      font-size: 0.775rem;
       font-weight: 500;
       color: var(--color-text-secondary);
       text-decoration: none;
@@ -633,243 +383,74 @@
       transition: border-color 0.2s;
     }
 
-    .tool-secondary-link:hover {
-      border-color: var(--color-text-secondary);
-    }
+    .tool-link:hover { border-color: var(--color-text-secondary); }
 
-    /* Install steps (collapsible) */
+    /* Install toggle */
+    .install-section { margin-top: 1rem; }
+    .install-toggle { font-family: var(--font); font-size: 0.775rem; font-weight: 500; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4em; padding: 0; transition: color 0.2s; }
+    .install-toggle:hover { color: var(--color-text); }
+    .install-toggle .chevron { transition: transform 0.2s; font-size: 0.65rem; }
+    .install-toggle.open .chevron { transform: rotate(90deg); }
+    .install-steps { display: none; margin-top: 0.75rem; padding-left: 0; list-style: none; counter-reset: step; }
+    .install-steps.visible { display: block; }
+    .install-steps li { font-size: 0.775rem; color: var(--color-text-secondary); line-height: 1.6; padding: 0.3rem 0 0.3rem 1.75rem; position: relative; counter-increment: step; }
+    .install-steps li::before { content: counter(step); position: absolute; left: 0; width: 1.2rem; height: 1.2rem; background: var(--color-bg-warm); border-radius: 50%; font-size: 0.65rem; font-weight: 600; color: var(--color-text-tertiary); display: flex; align-items: center; justify-content: center; top: 0.4rem; }
+    .install-steps code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.7rem; background: var(--color-bg-warm); padding: 0.15em 0.4em; border-radius: 3px; }
 
-    .install-section {
-      margin-top: 1.5rem;
-      border-top: 1px solid var(--color-border-light);
-      padding-top: 1.25rem;
-    }
-
-    .install-toggle {
-      font-family: var(--font);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4em;
-      padding: 0;
-      transition: color 0.2s;
-    }
-
-    .install-toggle:hover {
-      color: var(--color-text);
-    }
-
-    .install-toggle .chevron {
-      transition: transform 0.2s;
-      font-size: 0.7rem;
-    }
-
-    .install-toggle.open .chevron {
-      transform: rotate(90deg);
-    }
-
-    .install-steps {
-      display: none;
-      margin-top: 1rem;
-      padding-left: 0;
-      list-style: none;
-      counter-reset: step;
-    }
-
-    .install-steps.visible {
-      display: block;
-    }
-
-    .install-steps li {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-      padding: 0.4rem 0 0.4rem 2rem;
-      position: relative;
-      counter-increment: step;
-    }
-
-    .install-steps li::before {
-      content: counter(step);
-      position: absolute;
-      left: 0;
-      width: 1.4rem;
-      height: 1.4rem;
-      background: var(--color-bg-warm);
-      border-radius: 50%;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--color-text-tertiary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      top: 0.45rem;
-    }
-
-    .install-steps code {
-      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
-      font-size: 0.75rem;
-      background: var(--color-bg-warm);
-      padding: 0.15em 0.4em;
-      border-radius: 3px;
+    /* Tools image (right side) */
+    .tools-image {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: url('./assets/images/abstract-3.jpg') center/cover no-repeat,
+        radial-gradient(ellipse at 40% 40%, #8dd4c0 0%, #b8e0d2 30%, #e8e4d0 60%, #f0ece0 100%);
+      position: sticky;
+      top: 80px;
     }
 
     /* ─── Footer ─── */
-
-    footer {
-      background: var(--color-bg-warm);
-      border-top: 1px solid var(--color-border-light);
-    }
-
-    .footer-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2.5rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-left {
-      font-size: 0.8rem;
-      color: var(--color-text-tertiary);
-    }
-
-    .footer-left .sep {
-      color: var(--color-accent);
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-right a {
-      font-size: 0.8rem;
-      color: var(--color-text-tertiary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-right a:hover {
-      color: var(--color-text);
-    }
+    footer { background: var(--color-bg-warm); border-top: 1px solid var(--color-border-light); }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-left { font-size: 0.8rem; color: var(--color-text-tertiary); }
+    .footer-left .sep { color: var(--color-accent); }
+    .footer-right { display: flex; gap: 1.5rem; }
+    .footer-right a { font-size: 0.8rem; color: var(--color-text-tertiary); text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--color-text); }
 
     /* ─── Responsive ─── */
-
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 7.5rem 2rem 0;
-      }
-
-      .hero-right {
-        padding-top: 0;
-      }
-
-      .nav-inner, .pillars, .section, .footer-inner {
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-
-      .img-panel-contained {
-        margin-left: 2rem;
-        margin-right: 2rem;
-      }
-
-      .pillars-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .article-row {
-        grid-template-columns: 60px 1fr;
-      }
-
-      .article-side {
-        grid-column: 2;
-        text-align: left;
-      }
-
-      .article-tags {
-        justify-content: flex-start;
-      }
-
-      .article-formats {
-        justify-content: flex-start;
-      }
-
-      .tool-card {
-        grid-template-columns: 1fr;
-      }
-
-      .tool-info {
-        padding: 2rem;
-      }
-
-      .tool-visual {
-        min-height: 200px;
-      }
+      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 7.5rem 2rem 0; }
+      .hero-right { padding-top: 0; }
+      .hero-img { padding: 0 2rem; }
+      .hero-img-inner { height: 220px; }
+      .nav-inner, .pillars, .articles-section, .articles-table-section, .tools-section, .footer-inner { padding-left: 2rem; padding-right: 2rem; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .articles-featured-row { grid-template-columns: 1fr; }
+      .tools-layout { grid-template-columns: 1fr; }
+      .tools-image { max-width: 380px; position: static; }
+      .tool-list-features { columns: 1; }
     }
 
     @media (max-width: 600px) {
-      .hero {
-        padding: 6.5rem 1.25rem 0;
-      }
-
-      .nav-inner, .pillars, .section, .footer-inner, .tools-section {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-
-      .img-panel-contained {
-        margin-left: 1.25rem;
-        margin-right: 1.25rem;
-        border-radius: 10px;
-        height: 180px;
-      }
-
-      .img-panel {
-        height: 200px;
-      }
-
+      .hero { padding: 6.5rem 1.25rem 0; }
+      .hero-img { padding: 0 1.25rem; }
+      .hero-img-inner { height: 180px; border-radius: 10px; }
+      .hero-title { font-size: 2.5rem; }
+      .nav-inner, .pillars, .articles-section, .articles-table-section, .tools-section, .footer-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
       .nav-links { display: none; }
-
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .article-row {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-      }
-
-      .article-num {
-        padding-top: 0;
-      }
-
-      .hero-title {
-        font-size: 2.5rem;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .featured-img { aspect-ratio: 16/9; }
+      .articles-table thead th:nth-child(2) { display: none; }
+      .articles-table tbody td:nth-child(2) { display: none; }
+      .articles-table thead th:first-child { width: 90px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Nav -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">Research<span class="sep">/</span>Edge</a>
@@ -885,284 +466,207 @@
   <!-- Hero -->
   <header class="hero">
     <div class="hero-left">
-      <h1 class="hero-title">
-        Research<span class="slash">/</span>Edge<br>Series
-      </h1>
+      <h1 class="hero-title">Research<span class="slash">/</span>Edge<br>Series</h1>
     </div>
     <div class="hero-right">
-      <p class="hero-intro">
-        Our series investigates the rigour, inner workings, and practical failures of social and business research methodology — so that evidence-based practice becomes genuinely reliable.
-      </p>
-      <p class="hero-byline">
-        By <a href="https://github.com/vtmade">Vinay Thakur</a>&ensp;·&ensp;#vtmade
-      </p>
+      <p class="hero-intro">Our series investigates the rigour, inner workings, and practical failures of social and business research methodology — so that evidence-based practice becomes genuinely reliable.</p>
+      <p class="hero-byline">By <a href="https://github.com/vtmade">Vinay Thakur</a>&ensp;·&ensp;#vtmade</p>
       <a href="#articles" class="hero-cta">Browse articles &darr;</a>
     </div>
   </header>
 
-  <!-- Visual Break 1 — orange glow -->
-  <div class="img-panel-contained img-orange-glow" role="img" aria-hidden="true"></div>
+  <!-- Hero Image -->
+  <div class="hero-img">
+    <div class="hero-img-inner" role="img" aria-hidden="true"></div>
+  </div>
 
-  <!-- Approach Pillars — colored blocks like Anthropic -->
+  <!-- Pillars -->
   <section class="pillars" id="pillars">
     <div class="pillars-header">Core Approach</div>
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-num">/01</div>
-        <div>
-          <div class="pillar-title">Theoretical Rigor</div>
-          <p class="pillar-text">Every recommendation grounded in established research methodology, not opinion or convention.</p>
-        </div>
+        <div><div class="pillar-title">Theoretical Rigor</div><p class="pillar-text">Every recommendation grounded in established research methodology, not opinion or convention.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/02</div>
-        <div>
-          <div class="pillar-title">Practical Application</div>
-          <p class="pillar-text">Complex concepts made tangible through real-world examples and decision frameworks.</p>
-        </div>
+        <div><div class="pillar-title">Practical Application</div><p class="pillar-text">Complex concepts made tangible through real-world examples and decision frameworks.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/03</div>
-        <div>
-          <div class="pillar-title">Error Prevention</div>
-          <p class="pillar-text">Focus on avoiding systematic biases that compound silently across studies.</p>
-        </div>
+        <div><div class="pillar-title">Error Prevention</div><p class="pillar-text">Focus on avoiding systematic biases that compound silently across studies.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/04</div>
-        <div>
-          <div class="pillar-title">Actionable Insights</div>
-          <p class="pillar-text">Move from "interesting findings" to strategic decisions that withstand scrutiny.</p>
+        <div><div class="pillar-title">Actionable Insights</div><p class="pillar-text">Move from "interesting findings" to strategic decisions that withstand scrutiny.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles: Featured + Sidebar -->
+  <section class="articles-section" id="articles">
+    <div class="articles-section-header">
+      <span class="label">Published Articles</span>
+      <span class="count">6 entries</span>
+    </div>
+
+    <div class="articles-featured-row">
+      <!-- Featured (latest) -->
+      <a class="featured-card" href="./article.html?id=005-ai-qualitative-analysis">
+        <div class="featured-img">
+          <div class="featured-img-title">AI and the Qualitative<br>Analysis Problem</div>
         </div>
+        <div class="featured-meta">
+          <span class="featured-tag">AI &amp; Qualitative Methods</span>
+          <span class="featured-date">2025</span>
+        </div>
+        <p class="featured-excerpt">Most AI-powered qualitative analysis produces summaries that look useful but fall apart under scrutiny. Learn what rigorous analysis actually involves — from coding and theme construction to pattern detection — and how to use AI as a structured coding layer.</p>
+      </a>
+
+      <!-- Sidebar list -->
+      <div class="sidebar-articles">
+        <a class="sidebar-item" href="./article.html?id=004-the-trait-trap">
+          <div class="sidebar-meta">
+            <span class="sidebar-tag">Causation</span>
+            <span class="sidebar-date">2025</span>
+          </div>
+          <div class="sidebar-title">The Trait Trap: Why Copying Successful Companies Usually Fails</div>
+          <p class="sidebar-excerpt">Business advice confuses correlation with causation. Rigorous causal analysis — regression, statistical controls, propensity score matching — separates real drivers from halo effects.</p>
+        </a>
+
+        <a class="sidebar-item" href="./article.html?id=003-sample-size-paradox">
+          <div class="sidebar-meta">
+            <span class="sidebar-tag">Sampling</span>
+            <span class="sidebar-date">Sep 2025</span>
+          </div>
+          <div class="sidebar-title">The Sample Size Paradox</div>
+          <p class="sidebar-excerpt">Population size bears minimal relationship to required sample sizes. Precision requirements — not population counts — should drive sampling decisions.</p>
+        </a>
+
+        <a class="sidebar-item" href="./article.html?id=002-measurement-fundamentals">
+          <div class="sidebar-meta">
+            <span class="sidebar-tag">Measurement</span>
+            <span class="sidebar-date">Aug 2025</span>
+          </div>
+          <div class="sidebar-title">The Science of Proper Measurement</div>
+          <p class="sidebar-excerpt">Most research fails before data collection begins. Measurement model misspecification can inflate findings by 400%.</p>
+        </a>
+
+        <a class="sidebar-item" href="./article.html?id=001-unconscious-consumer-behavior">
+          <div class="sidebar-meta">
+            <span class="sidebar-tag">Consumer Behavior</span>
+            <span class="sidebar-date">Aug 2025</span>
+          </div>
+          <div class="sidebar-title">Why Consumers Unconsciously Mislead Us</div>
+          <p class="sidebar-excerpt">Consumers cannot consciously access their decision-making processes. Perception association methods uncover the real drivers.</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Visual Break 2 — pink-purple sweep -->
-  <div class="img-panel img-pink-sweep" role="img" aria-hidden="true"></div>
-
-  <!-- Articles -->
-  <section class="section" id="articles" style="background: var(--color-bg-warm); margin: 0 auto; max-width: none; padding-bottom: 4rem;">
-    <div style="max-width: 1280px; margin: 0 auto;">
-      <div class="section-header">
-        <span class="section-label">Published Articles</span>
-        <span class="section-count">6 entries</span>
-      </div>
-
-      <div class="articles-list">
-
-        <!-- #001 -->
-        <a class="article-row" href="./article.html?id=001-unconscious-consumer-behavior">
-          <div class="article-num">#001</div>
-          <div class="article-body">
-            <h2 class="article-title">Why Consumers Unconsciously Mislead Us</h2>
-            <p class="article-subtitle">Understanding Post-Hoc Rationalization in Consumer Research</p>
-            <p class="article-excerpt">
-              Consumers cannot consciously access their decision-making processes. Direct "why" questions fail — perception association methods uncover the real drivers behind choices.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">Aug 2025</div>
-            <div class="article-tags">
-              <span class="article-tag">System 1 &amp; 2</span>
-              <span class="article-tag">Consumer Behavior</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- #002 -->
-        <a class="article-row" href="./article.html?id=002-measurement-fundamentals">
-          <div class="article-num">#002</div>
-          <div class="article-body">
-            <h2 class="article-title">The Science of Proper Measurement</h2>
-            <p class="article-subtitle">Moving Beyond Casual Surveys to Rigorous Research Design</p>
-            <p class="article-excerpt">
-              Most research fails before data collection begins. Measurement model misspecification can inflate findings by 400%. The distinction between reflective and formative constructs changes everything.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">Aug 2025</div>
-            <div class="article-tags">
-              <span class="article-tag">Measurement</span>
-              <span class="article-tag">Survey Design</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- #003 -->
-        <a class="article-row" href="./article.html?id=003-sample-size-paradox">
-          <div class="article-num">#003</div>
-          <div class="article-body">
-            <h2 class="article-title">The Sample Size Paradox</h2>
-            <p class="article-subtitle">Why Statistical Precision Trumps Intuitive Mathematics</p>
-            <p class="article-excerpt">
-              Population size bears minimal relationship to required sample sizes. Precision requirements — not population counts — should drive sampling decisions. Validated against WHO and UNICEF standards.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">Sep 2025</div>
-            <div class="article-tags">
-              <span class="article-tag">Sampling</span>
-              <span class="article-tag">Statistics</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- #003 Supplement -->
-        <a class="article-row" href="./article.html?id=003-supplement-taxi-experiment">
-          <div class="article-num">#003<span class="supplement-badge">Suppl.</span></div>
-          <div class="article-body">
-            <h2 class="article-title">Can 300 Taxi Rides Represent a Million Rides?</h2>
-            <p class="article-subtitle">Experimental Validation Using Real NYC Taxi Data</p>
-            <p class="article-excerpt">
-              Real-world validation using 1 million NYC taxi transactions. Dramatic accuracy improvements from n=30 to n=300, diminishing returns beyond n=500, and 98% accuracy across all sample sizes.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">Sep 2025</div>
-            <div class="article-tags">
-              <span class="article-tag">Experiment</span>
-              <span class="article-tag">CLT</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- #004 -->
-        <a class="article-row" href="./article.html?id=004-the-trait-trap">
-          <div class="article-num">#004</div>
-          <div class="article-body">
-            <h2 class="article-title">The Trait Trap</h2>
-            <p class="article-subtitle">Why Copying Successful Companies Usually Fails</p>
-            <p class="article-excerpt">
-              Business advice confuses correlation with causation. Rigorous causal analysis — regression, statistical controls, propensity score matching — separates real drivers from halo effects.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">2025</div>
-            <div class="article-tags">
-              <span class="article-tag">Causation</span>
-              <span class="article-tag">Business Research</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- #005 -->
-        <a class="article-row" href="./article.html?id=005-ai-qualitative-analysis">
-          <div class="article-num">#005</div>
-          <div class="article-body">
-            <h2 class="article-title">AI and the Qualitative Analysis Problem</h2>
-            <p class="article-subtitle">Why Most AI Tools Flatten Qualitative Data</p>
-            <p class="article-excerpt">
-              AI summaries look useful but collapse under scrutiny. Rigorous qualitative analysis requires coding, theme construction, pattern detection, and cross-case analysis — not summarization.
-            </p>
-          </div>
-          <div class="article-side">
-            <div class="article-date">2025</div>
-            <div class="article-tags">
-              <span class="article-tag">AI</span>
-              <span class="article-tag">Qualitative Methods</span>
-            </div>
-            <div class="article-formats">
-              <span class="article-format-link">Read article &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Visual Break 3 — coral-teal watercolor -->
-  <div class="img-panel img-coral-watercolor" role="img" aria-hidden="true"></div>
+  <!-- All Articles Table -->
+  <div class="articles-table-section">
+    <table class="articles-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="window.location='./article.html?id=005-ai-qualitative-analysis'">
+          <td class="table-date">2025</td>
+          <td class="table-category">AI &amp; Qualitative</td>
+          <td class="table-title">AI and the Qualitative Analysis Problem</td>
+        </tr>
+        <tr onclick="window.location='./article.html?id=004-the-trait-trap'">
+          <td class="table-date">2025</td>
+          <td class="table-category">Causation</td>
+          <td class="table-title">The Trait Trap: Why Copying Successful Companies Usually Fails</td>
+        </tr>
+        <tr onclick="window.location='./article.html?id=003-supplement-taxi-experiment'">
+          <td class="table-date">Sep 2025</td>
+          <td class="table-category">Experiment</td>
+          <td class="table-title">Can 300 Taxi Rides Represent a Million Rides?</td>
+        </tr>
+        <tr onclick="window.location='./article.html?id=003-sample-size-paradox'">
+          <td class="table-date">Sep 2025</td>
+          <td class="table-category">Sampling</td>
+          <td class="table-title">The Sample Size Paradox: Why Statistical Precision Trumps Intuitive Mathematics</td>
+        </tr>
+        <tr onclick="window.location='./article.html?id=002-measurement-fundamentals'">
+          <td class="table-date">Aug 2025</td>
+          <td class="table-category">Measurement</td>
+          <td class="table-title">The Science of Proper Measurement</td>
+        </tr>
+        <tr onclick="window.location='./article.html?id=001-unconscious-consumer-behavior'">
+          <td class="table-date">Aug 2025</td>
+          <td class="table-category">Consumer Behavior</td>
+          <td class="table-title">Why Consumers Unconsciously Mislead Us</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Tools & Solutions -->
   <section class="tools-section" id="tools">
-    <div class="section-header">
-      <span class="section-label">Tools &amp; Solutions</span>
-    </div>
+    <h2 class="tools-header">Tools &amp; Solutions</h2>
 
-    <div class="tool-card">
-      <div class="tool-visual">
-        <div class="tool-visual-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#191919" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </div>
-        <div class="tool-visual-label">Claude Skill</div>
-      </div>
+    <div class="tools-layout">
+      <div class="tools-list">
+        <div class="tool-list-item">
+          <div class="tool-list-meta">
+            <span class="tool-list-badge">Claude Skill</span>
+          </div>
+          <h3 class="tool-list-title">Qualitative Text Analysis</h3>
+          <p class="tool-list-desc">A structured qualitative analysis pipeline for Claude. Analyzes interview transcripts, focus groups, survey responses, and other unstructured text using rigorous methods — grounded theory coding, thematic analysis, and six-lens pattern detection. Produces traceable, auditable output instead of summaries.</p>
 
-      <div class="tool-info">
-        <div class="tool-badge">Claude Skill</div>
-        <h2 class="tool-title">Qualitative Text Analysis</h2>
-        <p class="tool-desc">
-          A structured qualitative analysis pipeline for Claude. Analyzes interview transcripts, focus groups, survey responses, and other unstructured text using rigorous methods — grounded theory coding, thematic analysis, and six-lens pattern detection. Produces traceable, auditable output instead of summaries.
-        </p>
+          <ul class="tool-list-features">
+            <li>Hierarchical open coding</li>
+            <li>Theme construction with boundaries</li>
+            <li>Six pattern lenses</li>
+            <li>Cross-case participant matrix</li>
+            <li>Full source traceability</li>
+            <li>6 structured output files</li>
+          </ul>
 
-        <ul class="tool-features">
-          <li>Open coding with hierarchical tags (Domain / Category / Subcategory)</li>
-          <li>Theme construction with inclusion and exclusion boundaries</li>
-          <li>Six pattern lenses: similarity, difference, frequency, sequence, correspondence, causation</li>
-          <li>Cross-case participant matrix and typology detection</li>
-          <li>Full traceability — every quote verbatim, every code linked to source</li>
-          <li>Outputs 6 files: summary, themes, patterns, coding log, JSON data</li>
-        </ul>
+          <div class="tool-list-actions">
+            <a href="./claude-skills/qual-analysis.zip" download class="tool-dl-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download Skill
+            </a>
+            <a href="./article.html?id=005-ai-qualitative-analysis" class="tool-link">Read companion article</a>
+          </div>
 
-        <div class="tool-actions">
-          <a href="./claude-skills/qual-analysis.zip" download class="tool-download-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Download Skill
-          </a>
-          <a href="./article.html?id=005-ai-qualitative-analysis" class="tool-secondary-link">Read companion article</a>
-        </div>
-
-        <div class="install-section">
-          <button class="install-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('visible');">
-            <span class="chevron">&#9654;</span> How to install
-          </button>
-          <ol class="install-steps">
-            <li>Download the <code>qual-analysis.zip</code> file using the button above</li>
-            <li>Open <strong>Claude</strong> (claude.ai or Claude desktop app)</li>
-            <li>Navigate to <strong>Settings &rarr; Capabilities &rarr; Skills</strong></li>
-            <li>Upload the skill file from the downloaded zip</li>
-            <li>Provide your qualitative data (paste text, attach file, or point to a path) and ask Claude to analyze it</li>
-          </ol>
+          <div class="install-section">
+            <button class="install-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('visible');">
+              <span class="chevron">&#9654;</span> How to install
+            </button>
+            <ol class="install-steps">
+              <li>Download the <code>qual-analysis.zip</code> file above</li>
+              <li>Open <strong>Claude</strong> (claude.ai or desktop app)</li>
+              <li>Go to <strong>Settings &rarr; Capabilities &rarr; Skills</strong></li>
+              <li>Upload the skill file from the zip</li>
+              <li>Provide qualitative data and ask Claude to analyze it</li>
+            </ol>
+          </div>
         </div>
       </div>
+
+      <!-- Image on right -->
+      <div class="tools-image" role="img" aria-hidden="true"></div>
     </div>
   </section>
-
-  <!-- Visual Break 4 — teal-gold fluid -->
-  <div class="img-panel-contained img-teal-gold" role="img" aria-hidden="true"></div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-left">
-        Research<span class="sep">/</span>Edge Series&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2025
-      </div>
+      <div class="footer-left">Research<span class="sep">/</span>Edge Series&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2025</div>
       <div class="footer-right">
         <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
         <a href="https://github.com/vtmade" target="_blank" rel="noopener">GitHub</a>
