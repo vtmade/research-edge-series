@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research Edge Series — Vinay Thakur</title>
+  <title>R.edge — Research Edge Series</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23191919'/><text x='4' y='23' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='16' fill='%23c4703f'>R.</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,6 +21,7 @@
       --color-border: #e5e5e5;
       --color-border-light: #efefef;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font-title: 'Helvetica Neue', 'Montserrat', 'Inter', Helvetica, Arial, sans-serif;
       --warm-sand: #f0e6d3;
       --muted-sage: #d4ddd2;
       --pale-sky: #d0dde8;
@@ -33,7 +35,7 @@
     /* ─── Nav ─── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border-light); }
     .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 3rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: none; }
+    .nav-logo { font-family: var(--font-title); font-weight: 900; font-size: 0.9rem; color: var(--color-text); text-decoration: none; text-transform: lowercase; }
     .nav-logo .sep { color: var(--color-accent); margin: 0 0.1em; }
     .nav-links { display: flex; gap: 2.25rem; list-style: none; }
     .nav-links a { font-size: 0.825rem; font-weight: 400; color: var(--color-text-secondary); text-decoration: none; transition: color 0.2s; }
@@ -42,8 +44,8 @@
     /* ─── Hero ─── */
     .hero { max-width: 1280px; margin: 0 auto; padding: 9rem 3rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .hero-left { padding-top: 1rem; }
-    .hero-title { font-weight: 600; font-size: clamp(3.2rem, 6.5vw, 5rem); line-height: 1.0; letter-spacing: -0.035em; }
-    .hero-title .slash { color: var(--color-accent); font-weight: 400; }
+    .hero-title { font-family: var(--font-title); font-weight: 900; font-size: clamp(3.2rem, 6.5vw, 5.2rem); line-height: 1.0; letter-spacing: -0.04em; text-transform: lowercase; }
+    .hero-title .slash { color: var(--color-accent); font-weight: 900; }
     .hero-right { padding-top: 2.2rem; }
     .hero-intro { font-size: 1.05rem; font-weight: 400; line-height: 1.7; color: var(--color-text-secondary); max-width: 480px; margin-bottom: 1.75rem; }
     .hero-byline { font-size: 0.825rem; color: var(--color-text-tertiary); }
@@ -453,7 +455,7 @@
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Research<span class="sep">/</span>Edge</a>
+      <a href="#" class="nav-logo">research edge<span class="sep"> /</span></a>
       <ul class="nav-links">
         <li><a href="#pillars">Approach</a></li>
         <li><a href="#articles">Articles</a></li>
@@ -466,10 +468,10 @@
   <!-- Hero -->
   <header class="hero">
     <div class="hero-left">
-      <h1 class="hero-title">Research<span class="slash">/</span>Edge<br>Series</h1>
+      <h1 class="hero-title">research<br>edge <span class="slash">/</span></h1>
     </div>
     <div class="hero-right">
-      <p class="hero-intro">Our series investigates the rigour, inner workings, and practical failures of social and business research methodology — so that evidence-based practice becomes genuinely reliable.</p>
+      <p class="hero-intro">I write about finding human truth buried beneath flawed methodology. Each piece dissects a fundamental research failure — post-hoc rationalization, measurement misspecification, sampling theatre, false causation — and replaces anecdotal pattern-matching with rigorous, evidence-based practice that actually holds up under scrutiny.</p>
       <p class="hero-byline">By <a href="https://github.com/vtmade">Vinay Thakur</a>&ensp;·&ensp;#vtmade</p>
       <a href="#articles" class="hero-cta">Browse articles &darr;</a>
     </div>
@@ -486,19 +488,19 @@
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-num">/01</div>
-        <div><div class="pillar-title">Theoretical Rigor</div><p class="pillar-text">Every recommendation grounded in established research methodology, not opinion or convention.</p></div>
+        <div><div class="pillar-title">Find the Human Truth</div><p class="pillar-text">Strip away rationalization, social desirability, and cognitive artifacts to reach what people actually do, think, and feel — not what they tell you.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/02</div>
-        <div><div class="pillar-title">Practical Application</div><p class="pillar-text">Complex concepts made tangible through real-world examples and decision frameworks.</p></div>
+        <div><div class="pillar-title">Rule Out the Anecdotal</div><p class="pillar-text">Replace pattern-matching from success stories with causal methods that control for confounders, establish temporal sequence, and survive replication.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/03</div>
-        <div><div class="pillar-title">Error Prevention</div><p class="pillar-text">Focus on avoiding systematic biases that compound silently across studies.</p></div>
+        <div><div class="pillar-title">Measure What Matters</div><p class="pillar-text">Get construct measurement right before collecting a single data point. Wrong measurement models don't just add noise — they systematically distort every finding downstream.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/04</div>
-        <div><div class="pillar-title">Actionable Insights</div><p class="pillar-text">Move from "interesting findings" to strategic decisions that withstand scrutiny.</p></div>
+        <div><div class="pillar-title">Defend Every Claim</div><p class="pillar-text">Every insight traces back to evidence. Every interpretation is labeled. Every outlier is preserved. If you can't audit a finding, you can't ship it.</p></div>
       </div>
     </div>
   </section>
@@ -518,7 +520,7 @@
         </div>
         <div class="featured-meta">
           <span class="featured-tag">AI &amp; Qualitative Methods</span>
-          <span class="featured-date">2025</span>
+          <span class="featured-date">Apr 2026</span>
         </div>
         <p class="featured-excerpt">Most AI-powered qualitative analysis produces summaries that look useful but fall apart under scrutiny. Learn what rigorous analysis actually involves — from coding and theme construction to pattern detection — and how to use AI as a structured coding layer.</p>
       </a>
@@ -528,7 +530,7 @@
         <a class="sidebar-item" href="./article.html?id=004-the-trait-trap">
           <div class="sidebar-meta">
             <span class="sidebar-tag">Causation</span>
-            <span class="sidebar-date">2025</span>
+            <span class="sidebar-date">2026</span>
           </div>
           <div class="sidebar-title">The Trait Trap: Why Copying Successful Companies Usually Fails</div>
           <p class="sidebar-excerpt">Business advice confuses correlation with causation. Rigorous causal analysis — regression, statistical controls, propensity score matching — separates real drivers from halo effects.</p>
@@ -537,7 +539,7 @@
         <a class="sidebar-item" href="./article.html?id=003-sample-size-paradox">
           <div class="sidebar-meta">
             <span class="sidebar-tag">Sampling</span>
-            <span class="sidebar-date">Sep 2025</span>
+            <span class="sidebar-date">Sep 2026</span>
           </div>
           <div class="sidebar-title">The Sample Size Paradox</div>
           <p class="sidebar-excerpt">Population size bears minimal relationship to required sample sizes. Precision requirements — not population counts — should drive sampling decisions.</p>
@@ -546,7 +548,7 @@
         <a class="sidebar-item" href="./article.html?id=002-measurement-fundamentals">
           <div class="sidebar-meta">
             <span class="sidebar-tag">Measurement</span>
-            <span class="sidebar-date">Aug 2025</span>
+            <span class="sidebar-date">Aug 2026</span>
           </div>
           <div class="sidebar-title">The Science of Proper Measurement</div>
           <p class="sidebar-excerpt">Most research fails before data collection begins. Measurement model misspecification can inflate findings by 400%.</p>
@@ -555,7 +557,7 @@
         <a class="sidebar-item" href="./article.html?id=001-unconscious-consumer-behavior">
           <div class="sidebar-meta">
             <span class="sidebar-tag">Consumer Behavior</span>
-            <span class="sidebar-date">Aug 2025</span>
+            <span class="sidebar-date">Aug 2026</span>
           </div>
           <div class="sidebar-title">Why Consumers Unconsciously Mislead Us</div>
           <p class="sidebar-excerpt">Consumers cannot consciously access their decision-making processes. Perception association methods uncover the real drivers.</p>
@@ -576,32 +578,32 @@
       </thead>
       <tbody>
         <tr onclick="window.location='./article.html?id=005-ai-qualitative-analysis'">
-          <td class="table-date">2025</td>
+          <td class="table-date">Apr 2026</td>
           <td class="table-category">AI &amp; Qualitative</td>
           <td class="table-title">AI and the Qualitative Analysis Problem</td>
         </tr>
         <tr onclick="window.location='./article.html?id=004-the-trait-trap'">
-          <td class="table-date">2025</td>
+          <td class="table-date">2026</td>
           <td class="table-category">Causation</td>
           <td class="table-title">The Trait Trap: Why Copying Successful Companies Usually Fails</td>
         </tr>
         <tr onclick="window.location='./article.html?id=003-supplement-taxi-experiment'">
-          <td class="table-date">Sep 2025</td>
+          <td class="table-date">Sep 2026</td>
           <td class="table-category">Experiment</td>
           <td class="table-title">Can 300 Taxi Rides Represent a Million Rides?</td>
         </tr>
         <tr onclick="window.location='./article.html?id=003-sample-size-paradox'">
-          <td class="table-date">Sep 2025</td>
+          <td class="table-date">Sep 2026</td>
           <td class="table-category">Sampling</td>
           <td class="table-title">The Sample Size Paradox: Why Statistical Precision Trumps Intuitive Mathematics</td>
         </tr>
         <tr onclick="window.location='./article.html?id=002-measurement-fundamentals'">
-          <td class="table-date">Aug 2025</td>
+          <td class="table-date">Aug 2026</td>
           <td class="table-category">Measurement</td>
           <td class="table-title">The Science of Proper Measurement</td>
         </tr>
         <tr onclick="window.location='./article.html?id=001-unconscious-consumer-behavior'">
-          <td class="table-date">Aug 2025</td>
+          <td class="table-date">Aug 2026</td>
           <td class="table-category">Consumer Behavior</td>
           <td class="table-title">Why Consumers Unconsciously Mislead Us</td>
         </tr>
@@ -666,7 +668,7 @@
   <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-left">Research<span class="sep">/</span>Edge Series&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2025</div>
+      <div class="footer-left">research edge<span class="sep"> /</span>&ensp;·&ensp;Vinay Thakur&ensp;·&ensp;2026</div>
       <div class="footer-right">
         <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
         <a href="https://github.com/vtmade" target="_blank" rel="noopener">GitHub</a>
