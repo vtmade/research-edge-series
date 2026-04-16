@@ -47,7 +47,9 @@
     .hero-title { font-family: var(--font-title); font-weight: 900; font-size: clamp(3.2rem, 6.5vw, 5.2rem); line-height: 1.0; letter-spacing: -0.04em; text-transform: lowercase; }
     .hero-title .slash { color: var(--color-accent); font-weight: 900; }
     .hero-right { padding-top: 2.2rem; }
-    .hero-intro { font-size: 1.05rem; font-weight: 400; line-height: 1.7; color: var(--color-text-secondary); max-width: 480px; margin-bottom: 1.75rem; }
+    .hero-intro { font-size: 1rem; font-weight: 400; line-height: 1.75; color: var(--color-text-secondary); max-width: 520px; margin-bottom: 1rem; }
+    .hero-intro-secondary { font-size: 0.9rem; font-weight: 400; line-height: 1.7; color: var(--color-text-secondary); max-width: 520px; margin-bottom: 1rem; }
+    .hero-intro-tertiary { font-size: 0.85rem; font-weight: 400; line-height: 1.7; color: var(--color-text-tertiary); max-width: 520px; margin-bottom: 1.5rem; }
     .hero-byline { font-size: 0.825rem; color: var(--color-text-tertiary); }
     .hero-byline a { color: var(--color-text-secondary); text-decoration: none; border-bottom: 1px solid var(--color-border); transition: border-color 0.2s; }
     .hero-byline a:hover { border-color: var(--color-text-secondary); }
@@ -65,12 +67,11 @@
     /* ─── Pillars ─── */
     .pillars { max-width: 1280px; margin: 0 auto; padding: 3rem 3rem 4rem; }
     .pillars-header { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1.5rem; }
-    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .pillar-card { border-radius: 12px; padding: 1.75rem; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; }
     .pillar-card:nth-child(1) { background: var(--warm-sand); }
     .pillar-card:nth-child(2) { background: var(--muted-sage); }
     .pillar-card:nth-child(3) { background: var(--pale-sky); }
-    .pillar-card:nth-child(4) { background: var(--light-lavender); }
     .pillar-num { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; color: rgba(25,25,25,0.4); margin-bottom: auto; padding-bottom: 1rem; }
     .pillar-title { font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem; }
     .pillar-text { font-size: 0.825rem; font-weight: 400; line-height: 1.55; color: rgba(25,25,25,0.7); }
@@ -471,8 +472,10 @@
       <h1 class="hero-title">research<br>edge <span class="slash">/</span></h1>
     </div>
     <div class="hero-right">
-      <p class="hero-intro">I write about finding human truth buried beneath flawed methodology. Each piece dissects a fundamental research failure — post-hoc rationalization, measurement misspecification, sampling theatre, false causation — and replaces anecdotal pattern-matching with rigorous, evidence-based practice that actually holds up under scrutiny.</p>
-      <p class="hero-byline">By <a href="https://github.com/vtmade">Vinay Thakur</a>&ensp;·&ensp;#vtmade</p>
+      <p class="hero-intro">I'm <a href="https://github.com/vtmade">Vinay Thakur</a> — I lead insights and marketing analytics at Visa across Central Europe, Middle East, and Africa. Before that, I spent years across agencies and corporate research roles in APAC, working at the intersection of marketing science, social research, and applied analytics. What I kept seeing — in boardrooms, strategy decks, and published reports — was smart people making high-stakes decisions on methodology that had never been properly questioned. Surveys measuring the wrong construct. Samples sized by gut feel. Correlations dressed up as causes. Not from bad intentions, but from methods that were never stress-tested.</p>
+      <p class="hero-intro-secondary">The Research Edge Series is where I share articles and notes that provide evidence-based guidance for researchers, strategists, and anyone working with data who wants to move beyond casual data collection to genuinely rigorous practice. Each installment takes apart a fundamental methodological challenge — from psychometrics and sampling theory to causal inference and AI-driven qualitative analysis — and makes the fix practical. Everything here is open source: articles, tools, datasets. Take it, use it, build on it.</p>
+      <p class="hero-intro-tertiary">I welcome contributors and co-editors. If you have a methodological challenge or learning you'd like to write about, this is your platform too.</p>
+      <p class="hero-byline"><a href="https://github.com/vtmade">github.com/vtmade</a>&ensp;·&ensp;<a href="https://www.linkedin.com/in/vinaythakur">LinkedIn</a>&ensp;·&ensp;INSEAD</p>
       <a href="#articles" class="hero-cta">Browse articles &darr;</a>
     </div>
   </header>
@@ -488,19 +491,15 @@
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-num">/01</div>
-        <div><div class="pillar-title">Find the Human Truth</div><p class="pillar-text">Strip away rationalization, social desirability, and cognitive artifacts to reach what people actually do, think, and feel — not what they tell you.</p></div>
+        <div><div class="pillar-title">Methodological Rigor</div><p class="pillar-text">Every article is grounded in established research methodology — not opinion, not convention, not what worked once for one company. We address measurement validity, sampling theory, causal inference, and qualitative discipline with the same standards applied in peer-reviewed research.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/02</div>
-        <div><div class="pillar-title">Rule Out the Anecdotal</div><p class="pillar-text">Replace pattern-matching from success stories with causal methods that control for confounders, establish temporal sequence, and survive replication.</p></div>
+        <div><div class="pillar-title">Open Source, Open Access</div><p class="pillar-text">Rigorous methods shouldn't live behind paywalls. Every article, tool, dataset, and code sample in this series is freely available on GitHub. Download it, fork it, adapt it for your own research context. The knowledge belongs to the community.</p></div>
       </div>
       <div class="pillar-card">
         <div class="pillar-num">/03</div>
-        <div><div class="pillar-title">Measure What Matters</div><p class="pillar-text">Get construct measurement right before collecting a single data point. Wrong measurement models don't just add noise — they systematically distort every finding downstream.</p></div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-num">/04</div>
-        <div><div class="pillar-title">Defend Every Claim</div><p class="pillar-text">Every insight traces back to evidence. Every interpretation is labeled. Every outlier is preserved. If you can't audit a finding, you can't ship it.</p></div>
+        <div><div class="pillar-title">Built for Practitioners</div><p class="pillar-text">This isn't academic theory for its own sake. Each piece is written for working researchers, analysts, and strategists who need methods that survive real-world conditions — tight timelines, imperfect data, stakeholders who need to trust the findings.</p></div>
       </div>
     </div>
   </section>
