@@ -25,3 +25,10 @@ Thumbs.db
 # Draft articles
 drafts/
 *.draft.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
