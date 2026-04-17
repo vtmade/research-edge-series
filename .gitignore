@@ -25,3 +25,7 @@ Thumbs.db
 # Draft articles
 drafts/
 *.draft.md
+
+# Local workspace
+_local/
+CLAUDE.md

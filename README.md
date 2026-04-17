@@ -101,6 +101,18 @@ Understand why most AI-powered qualitative analysis produces summaries that look
 
 ---
 
+## Tools & Interactive Resources
+
+### Correspondence Analysis Map
+A browser-based interactive tool for correspondence analysis. Paste or upload any grid data — brands × attributes, segments × motivations, markets × features — and generate a perceptual biplot. Handles the big-brand effect through built-in standardisation, supports draggable labels for cluttered maps, and exports publication-ready PNG and SVG.
+
+**Available on the live site** — no installation needed, runs entirely in the browser.
+
+### [Qualitative Text Analysis Skill](./claude-skills/)
+A structured qualitative analysis pipeline for Claude. See [#005](./articles/005-ai-qualitative-analysis.md) for the companion article.
+
+---
+
 ## Repository Structure
 
 ```
@@ -123,18 +135,30 @@ research-edge-series/
 When referencing articles from this series, please use:
 
 ```
-Thakur, V. (2025). [Article Title]. Research Edge Series #[Number]. 
+Thakur, V. (2026). [Article Title]. Research Edge Series #[Number]. 
 Retrieved from https://github.com/vtmade/research-edge-series
 ```
 
 ## Contact
 
-For questions, feedback, or collaboration opportunities, connect with Vinay Thakur.
-
-## License
-
-This content is designed for educational and professional development purposes. Please see individual articles for specific usage guidelines.
+For questions, feedback, or collaboration opportunities, reach out to Vinay Thakur at [vpst18@gmail.com](mailto:vpst18@gmail.com).
 
 ---
 
-**Research Edge Series** · #vtmade - Transforming how we approach social & business research methodology.
+## License
+
+All materials are provided under the [MIT License](./LICENSE).
+
+## Disclaimer
+
+This project is created by Vinay Thakur in a personal capacity for educational and knowledge-sharing purposes only. It does not represent, reflect, or endorse the views of any employer, organisation, or affiliated entity. The content is not intended for commercial use. You are free to use, adapt, and reference this work at your own discretion — please assess its suitability for your context independently.
+
+**Citation:** If you use or reference this work, please cite:
+
+```
+Thakur, V. (2026). Research Edge Series. https://github.com/vtmade/research-edge-series
+```
+
+---
+
+**Research Edge Series** · [#vtmade](https://github.com/vtmade)
