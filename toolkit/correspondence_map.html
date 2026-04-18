@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Correspondence Analysis Map — Research Edge</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text x='0' y='26' font-family='Helvetica,Arial,sans-serif' font-weight='900' font-size='22' fill='%23191919'>re</text><text x='20' y='26' font-family='Helvetica,Arial,sans-serif' font-weight='900' font-size='28' fill='%23191919'>/</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-warm: #f9f7f4;
+    --color-text: #191919;
+    --color-text-secondary: #555555;
+    --color-text-tertiary: #888888;
+    --color-accent: #c4703f;
+    --color-border: #e5e5e5;
+    --color-border-light: #efefef;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-title: 'Helvetica Neue', 'Montserrat', 'Inter', Helvetica, Arial, sans-serif;
+    --warm-sand: #f0e6d3;
+    --muted-sage: #d4ddd2;
+    --pale-sky: #d0dde8;
+    --light-lavender: #ddd5e8;
+    --chart-blue: #1434CB;
+    --chart-cobalt: #1A3A7A;
+    --chart-gold: #FCC015;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+  ::selection { background: rgba(196,112,63,0.15); }
+
+  /* ─── Nav ─── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border-light); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 3rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+  .nav-logo img { height: 24px; width: auto; display: block; }
+  .nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 0.825rem; font-weight: 400; color: var(--color-text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--color-text); }
+
+  /* ─── Hero ─── */
+  .hero-banner {
+    width: 100%; height: 280px; margin-top: 56px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 55% 60%, rgba(255,20,147,0.7) 0%, rgba(180,0,180,0.5) 25%, transparent 55%),
+      radial-gradient(ellipse at 30% 30%, rgba(100,60,180,0.6) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 25%, rgba(60,40,120,0.8) 0%, transparent 55%),
+      linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 30%, #1e0e3a 60%, #120828 100%);
+  }
+  .hero-banner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 55%, rgba(255,255,255,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 58% 58%, rgba(255,200,255,0.15) 0%, transparent 20%);
+    filter: blur(2px);
+  }
+  .hero-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2.5rem 3rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.45));
+    z-index: 1;
+  }
+  .hero-label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-family: var(--font-title); font-weight: 900; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: #fff; letter-spacing: -0.03em; line-height: 1.1;
+  }
+  .hero-title .slash { color: var(--color-accent); }
+  .hero-subtitle {
+    font-size: 0.9rem; font-weight: 400; color: rgba(255,255,255,0.7);
+    margin-top: 0.5rem; max-width: 600px;
+  }
+
+  /* ─── Main ─── */
+  .main { max-width: 1280px; margin: 0 auto; padding: 2.5rem 3rem 5rem; }
+
+  /* ─── Cards ─── */
+  .card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+  .card-header svg { width: 18px; height: 18px; color: var(--color-accent); flex-shrink: 0; }
+  .card-title {
+    font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .card-desc {
+    font-size: 0.825rem; color: var(--color-text-secondary); line-height: 1.55;
+    margin-bottom: 1.25rem; max-width: 640px;
+  }
+
+  /* ─── Tabs ─── */
+  .tabs { display: flex; gap: 0; margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border-light); }
+  .tab {
+    padding: 0.6rem 1.25rem; background: none; border: none; border-bottom: 2px solid transparent;
+    font: 500 0.825rem var(--font); color: var(--color-text-tertiary); cursor: pointer; transition: all 0.2s;
+  }
+  .tab:hover { color: var(--color-text-secondary); }
+  .tab.on { color: var(--color-text); border-bottom-color: var(--color-accent); }
+
+  /* ─── Drop Zone ─── */
+  .drop {
+    border: 1.5px dashed var(--color-border); border-radius: 10px; padding: 2.5rem;
+    text-align: center; cursor: pointer; background: var(--color-bg-warm); transition: all 0.2s;
+  }
+  .drop:hover { border-color: var(--color-accent); background: #faf5f0; }
+  .drop svg { width: 32px; height: 32px; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
+  .drop-label { font-size: 0.85rem; font-weight: 500; color: var(--color-text); }
+  .drop-hint { font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: 0.25rem; }
+
+  textarea.csv {
+    width: 100%; min-height: 140px; border: 1px solid var(--color-border); border-radius: 8px;
+    padding: 1rem; font: 0.75rem 'SF Mono', Menlo, Consolas, monospace; resize: vertical;
+    outline: none; background: var(--color-bg-warm); color: var(--color-text); line-height: 1.5;
+  }
+  textarea.csv:focus { border-color: var(--color-accent); background: #fff; }
+
+  /* ─── Config Panel ─── */
+  .config-panel {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+    margin-top: 1.25rem; padding: 1.25rem; background: var(--color-bg-warm); border-radius: 10px;
+  }
+  .config-group { display: flex; flex-direction: column; gap: 0.3rem; }
+  .config-group label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .config-group select, .config-group input[type=text] {
+    padding: 0.5rem 0.75rem; border: 1px solid var(--color-border); border-radius: 6px;
+    font: 0.825rem var(--font); outline: none; background: #fff; color: var(--color-text);
+  }
+  .config-group select:focus, .config-group input[type=text]:focus { border-color: var(--color-accent); }
+
+  /* ─── Standardization Info ─── */
+  .std-info {
+    grid-column: 1 / -1; margin-top: 0.25rem;
+    padding: 1rem 1.25rem; background: rgba(196,112,63,0.06); border-radius: 8px; border-left: 3px solid var(--color-accent);
+  }
+  .std-info-toggle {
+    font: 500 0.8rem var(--font); color: var(--color-text); background: none; border: none;
+    cursor: pointer; display: flex; align-items: center; gap: 0.4em; padding: 0;
+  }
+  .std-info-toggle svg { width: 12px; height: 12px; transition: transform 0.2s; color: var(--color-accent); }
+  .std-info-toggle.open svg { transform: rotate(90deg); }
+  .std-info-body { display: none; margin-top: 0.75rem; }
+  .std-info-body.visible { display: block; }
+  .std-info-body dl { font-size: 0.8rem; line-height: 1.6; }
+  .std-info-body dt { font-weight: 600; color: var(--color-text); margin-top: 0.5rem; }
+  .std-info-body dt:first-child { margin-top: 0; }
+  .std-info-body dd { color: var(--color-text-secondary); margin-left: 0; margin-bottom: 0.25rem; }
+
+  /* ─── Action Buttons ─── */
+  .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    padding: 0.7em 1.5em; font: 500 0.825rem var(--font); color: #fff;
+    background: var(--color-text); border: none; border-radius: 100px; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #333; }
+  .btn-primary svg { width: 14px; height: 14px; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    padding: 0.65em 1.4em; font: 500 0.8rem var(--font); color: var(--color-text-secondary);
+    background: none; border: 1px solid var(--color-border); border-radius: 100px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: #ccc; background: var(--color-bg-warm); color: var(--color-text); }
+  .btn-secondary svg { width: 13px; height: 13px; }
+  .status-msg { font-size: 0.8rem; color: var(--color-text-tertiary); margin-left: 0.25rem; }
+  .status-msg.err { color: #c0392b; }
+
+  /* ─── Chart Controls ─── */
+  .controls-panel {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem 1.25rem; padding: 1.25rem; background: var(--color-bg-warm); border-radius: 10px; margin-bottom: 1.25rem;
+  }
+  .ctrl { display: flex; flex-direction: column; gap: 0.25rem; }
+  .ctrl label {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .ctrl-row { display: flex; align-items: center; gap: 0.5rem; }
+  .ctrl input[type=range] { flex: 1; accent-color: var(--color-accent); height: 4px; }
+  .ctrl .val { min-width: 20px; text-align: right; font: 500 0.75rem var(--font); color: var(--color-text); }
+  .ctrl input[type=number] {
+    width: 68px; padding: 0.3rem 0.5rem; border: 1px solid var(--color-border); border-radius: 5px;
+    font: 0.8rem var(--font); outline: none; background: #fff;
+  }
+  .ctrl input[type=number]:focus { border-color: var(--color-accent); }
+  .range-pair { display: flex; gap: 0.35rem; align-items: center; }
+  .range-pair span { font-size: 0.7rem; color: var(--color-text-tertiary); }
+  .ctrl-check { flex-direction: row; align-items: center; gap: 0.5rem; }
+  .ctrl-check label { text-transform: none; font-weight: 500; font-size: 0.825rem; color: var(--color-text); letter-spacing: 0; }
+  .ctrl-check input[type=checkbox] { accent-color: var(--color-accent); }
+  .ctrl-actions { display: flex; gap: 0.5rem; align-items: flex-end; }
+  .btn-small {
+    padding: 0.4rem 0.9rem; border: 1px solid var(--color-border); border-radius: 6px;
+    background: #fff; font: 500 0.75rem var(--font); cursor: pointer; color: var(--color-text-secondary); transition: all 0.2s;
+  }
+  .btn-small:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  /* ─── Chart Container ─── */
+  .chart-wrap { position: relative; width: 100%; background: #fff; border: 1px solid var(--color-border-light); border-radius: 10px; overflow: hidden; }
+  .chart-wrap canvas { display: block; width: 100%; }
+
+  /* ─── Chart Footer ─── */
+  .chart-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 1rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .legend { display: flex; gap: 1.25rem; font-size: 0.8rem; color: var(--color-text-secondary); }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-diamond { width: 8px; height: 8px; border-radius: 1px; transform: rotate(45deg); }
+  .export-btns { display: flex; gap: 0.5rem; }
+  .btn-export {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    padding: 0.5rem 1rem; font: 500 0.75rem var(--font); color: var(--color-text);
+    background: var(--color-bg-warm); border: 1px solid var(--color-border); border-radius: 100px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-export:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .btn-export svg { width: 12px; height: 12px; }
+
+  .inertia-bar {
+    margin-top: 1rem; padding: 0.85rem 1.15rem; background: var(--color-bg-warm); border-radius: 8px;
+    font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.6;
+  }
+  .inertia-bar strong { color: var(--color-text); }
+  .drag-hint { font-size: 0.8rem; color: var(--color-text-tertiary); font-style: italic; margin-top: 0.5rem; }
+
+  .tooltip {
+    display: none; position: absolute; background: rgba(25,25,25,0.92); color: #fff;
+    padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.7rem; pointer-events: none;
+    z-index: 10; white-space: nowrap; line-height: 1.5; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ─── How to Read Section ─── */
+  .guide-section {
+    margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--color-border-light);
+  }
+  .guide-header {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.25rem;
+  }
+  .guide-header svg { width: 20px; height: 20px; color: var(--color-accent); }
+  .guide-header h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+  .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .guide-card {
+    padding: 1.25rem; border-radius: 10px; min-height: 120px;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .guide-card:nth-child(4n+1) { background: var(--warm-sand); }
+  .guide-card:nth-child(4n+2) { background: var(--muted-sage); }
+  .guide-card:nth-child(4n+3) { background: var(--pale-sky); }
+  .guide-card:nth-child(4n+4) { background: var(--light-lavender); }
+  .guide-card-title { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .guide-card-text { font-size: 0.8rem; line-height: 1.55; color: rgba(25,25,25,0.7); }
+
+  /* ─── Footer ─── */
+  footer { background: var(--color-bg-warm); border-top: 1px solid var(--color-border-light); }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto; padding: 2.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-left { font-size: 0.8rem; color: var(--color-text-tertiary); }
+  .footer-left .sep { color: var(--color-accent); }
+  .footer-right { display: flex; gap: 1.5rem; }
+  .footer-right a { font-size: 0.8rem; color: var(--color-text-tertiary); text-decoration: none; transition: color 0.2s; }
+  .footer-right a:hover { color: var(--color-text); }
+
+  .hid { display: none; }
+
+  /* ─── Download Strip ─── */
+  .dl-strip {
+    background: var(--color-bg-warm); border-bottom: 1px solid var(--color-border-light);
+  }
+  .dl-strip-inner {
+    max-width: 1280px; margin: 0 auto; padding: 1.5rem 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .dl-card {
+    display: flex; align-items: center; gap: 1rem;
+    background: #fff; border: 1px solid var(--color-border-light); border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .dl-card-icon {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dl-card-icon.html { background: rgba(196,112,63,0.1); color: var(--color-accent); }
+  .dl-card-icon.skill { background: rgba(20,52,203,0.08); color: var(--chart-blue); }
+  .dl-card-icon svg { width: 18px; height: 18px; }
+  .dl-card-body { flex: 1; min-width: 0; }
+  .dl-card-label {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-text-tertiary); margin-bottom: 0.15rem;
+  }
+  .dl-card-title { font-size: 0.875rem; font-weight: 600; color: var(--color-text); line-height: 1.2; }
+  .dl-card-desc { font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 0.15rem; line-height: 1.4; }
+  .dl-btn {
+    display: inline-flex; align-items: center; gap: 0.4em; flex-shrink: 0;
+    padding: 0.5em 1.1em; font: 500 0.775rem var(--font); color: #fff;
+    background: var(--color-text); border: none; border-radius: 100px;
+    text-decoration: none; transition: background 0.2s; white-space: nowrap;
+  }
+  .dl-btn:hover { background: #333; }
+  .dl-btn svg { width: 12px; height: 12px; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .nav-inner, .main, .footer-inner { padding-left: 2rem; padding-right: 2rem; }
+    .dl-strip-inner { padding-left: 2rem; padding-right: 2rem; }
+    .hero-content { padding: 2rem; }
+    .config-panel { grid-template-columns: 1fr 1fr; }
+    .guide-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-inner, .main, .footer-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .dl-strip-inner { padding: 1rem 1.25rem; grid-template-columns: 1fr; }
+    .hero-content { padding: 1.5rem 1.25rem; }
+    .hero-banner { height: 220px; }
+    .nav-links { gap: 1.25rem; }
+    .config-panel { grid-template-columns: 1fr; }
+    .guide-grid { grid-template-columns: 1fr; }
+    .chart-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/logo-re.png" alt="Re/" style="height:24px;width:auto;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#articles">Articles</a></li>
+        <li><a href="../index.html#tools">Tools &amp; Solutions</a></li>
+        <li><a href="../index.html#pillars">Approach</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-label">Toolkit</div>
+      <h1 class="hero-title">Correspondence Analysis <span class="slash">/</span></h1>
+      <p class="hero-subtitle">Plot any grid data — brands vs attributes, segments vs drivers, markets vs features. Interactive perceptual biplot with SVD-based decomposition.</p>
+    </div>
+  </div>
+
+  <!-- Download Strip -->
+  <div class="dl-strip">
+    <div class="dl-strip-inner">
+
+      <!-- HTML download -->
+      <div class="dl-card">
+        <div class="dl-card-icon html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        </div>
+        <div class="dl-card-body">
+          <div class="dl-card-label">Browser Tool</div>
+          <div class="dl-card-title">Download HTML</div>
+          <div class="dl-card-desc">Single file — open offline, no install needed</div>
+        </div>
+        <a href="./correspondence_map.html" download="correspondence_map.html" class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+
+      <!-- Claude skill download -->
+      <div class="dl-card">
+        <div class="dl-card-icon skill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="dl-card-body">
+          <div class="dl-card-label">Claude Skill</div>
+          <div class="dl-card-title">Correspondence Analysis Skill</div>
+          <div class="dl-card-desc">Validate data, choose standardisation, interpret the map</div>
+        </div>
+        <a href="../claude-skills/correspondence-analysis.zip" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- Data Input Card -->
+    <div class="card">
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h2 class="card-title">Data Input</h2>
+      </div>
+      <p class="card-desc">Columns represent one dimension (brands, segments, markets). Rows represent another (attributes, drivers, barriers). Cells must be numeric values.</p>
+
+      <div class="tabs">
+        <button class="tab on" data-m="file" onclick="swm('file')">Upload File</button>
+        <button class="tab" data-m="paste" onclick="swm('paste')">Paste CSV</button>
+      </div>
+
+      <div id="fm">
+        <div class="drop" id="fd" onclick="document.getElementById('fi').click()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="drop-label">Drop .csv or .xlsx here, or click to browse</div>
+          <div class="drop-hint">Up to 10 columns and 30 rows</div>
+        </div>
+        <input type="file" id="fi" accept=".csv,.xlsx,.xls" class="hid">
+      </div>
+      <div id="pm" class="hid">
+        <textarea class="csv" id="ct" placeholder=",Brand A,Brand B,Brand C&#10;Attr 1,45,32,67&#10;Attr 2,23,55,41"></textarea>
+      </div>
+
+      <div class="config-panel">
+        <div class="config-group">
+          <label>Column label (legend)</label>
+          <input type="text" id="colLabel" value="Brands" placeholder="e.g. Brands, Segments">
+        </div>
+        <div class="config-group">
+          <label>Row label (legend)</label>
+          <input type="text" id="rowLabel" value="Attributes" placeholder="e.g. Attributes, Drivers">
+        </div>
+        <div class="config-group">
+          <label>Standardisation</label>
+          <select id="stdMode">
+            <option value="raw">None (standard CA)</option>
+            <option value="double">Equalised (fixes big brand effect)</option>
+            <option value="zscore">Fully normalised (strong correction)</option>
+          </select>
+        </div>
+
+        <!-- Standardisation Explanation -->
+        <div class="std-info">
+          <button class="std-info-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('visible');">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            What is the big brand effect and when to correct it?
+          </button>
+          <div class="std-info-body">
+            <p style="margin-bottom:0.75rem;font-size:0.8rem;line-height:1.65;color:var(--color-text-secondary);">Imagine Brand A scores 80 on every attribute while Brand B scores 40. In raw data, Brand A dominates the map simply because its numbers are bigger — not because it has a distinctive profile. The map shows size differences instead of <em>shape</em> differences. That is the big brand effect.</p>
+            <p style="margin-bottom:0.75rem;font-size:0.8rem;line-height:1.65;color:var(--color-text-secondary);">Standardisation removes this distortion so the map reveals what actually differentiates each column and row from the others — which is typically what you want.</p>
+            <dl>
+              <dt>None (standard CA)</dt>
+              <dd>Uses your data as-is. Best when all columns already have similar totals and no single column dominates. If your map looks like one cluster with an outlier far away, try switching to an equalised mode.</dd>
+              <dt>Equalised (recommended)</dt>
+              <dd>Removes the average level of each row and each column, keeping only the pattern of deviations. Think of it as asking: "Ignoring that Brand A scores higher overall, <em>where does it score relatively higher or lower than its own average?</em>" This is the safest general-purpose correction.</dd>
+              <dt>Fully normalised</dt>
+              <dd>Goes further — each row is rescaled so all rows have the same spread. Use this when some rows (attributes, drivers) have a much wider range of scores than others, causing them to dominate the map. This is the strongest correction; it forces every row to contribute equally.</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="go()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate Map
+        </button>
+        <button class="btn-secondary" onclick="loadSample('brand')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Sample: Brands
+        </button>
+        <button class="btn-secondary" onclick="loadSample('segment')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Sample: Segments
+        </button>
+        <span class="status-msg" id="st"></span>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="card hid" id="cs">
+      <div class="controls-panel">
+        <div class="ctrl"><label>Axis X Range</label><div class="range-pair"><input type="number" id="x0" step="0.1" onchange="draw()"><span>to</span><input type="number" id="x1" step="0.1" onchange="draw()"></div></div>
+        <div class="ctrl"><label>Axis Y Range</label><div class="range-pair"><input type="number" id="y0" step="0.1" onchange="draw()"><span>to</span><input type="number" id="y1" step="0.1" onchange="draw()"></div></div>
+        <div class="ctrl"><label id="colFontLbl">Col Font</label><div class="ctrl-row"><input type="range" id="bf" min="8" max="24" value="13" oninput="this.nextElementSibling.textContent=this.value;draw()"><span class="val">13</span></div></div>
+        <div class="ctrl"><label id="rowFontLbl">Row Font</label><div class="ctrl-row"><input type="range" id="af" min="7" max="20" value="10" oninput="this.nextElementSibling.textContent=this.value;draw()"><span class="val">10</span></div></div>
+        <div class="ctrl"><label id="colDotLbl">Col Marker</label><div class="ctrl-row"><input type="range" id="bd" min="4" max="24" value="9" oninput="this.nextElementSibling.textContent=this.value;draw()"><span class="val">9</span></div></div>
+        <div class="ctrl"><label id="rowDotLbl">Row Marker</label><div class="ctrl-row"><input type="range" id="ad" min="2" max="16" value="5" oninput="this.nextElementSibling.textContent=this.value;draw()"><span class="val">5</span></div></div>
+        <div class="ctrl ctrl-check"><input type="checkbox" id="sl" checked onchange="draw()"><label for="sl">Leader lines</label></div>
+        <div class="ctrl ctrl-check"><input type="checkbox" id="so" onchange="draw()"><label for="so">Origin lines</label></div>
+        <div class="ctrl-actions">
+          <button class="btn-small" onclick="resetLbl()">
+            <svg style="width:11px;height:11px;vertical-align:-1px;margin-right:3px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Reset Labels
+          </button>
+          <button class="btn-small" onclick="autoFit()">Auto-fit</button>
+          <button class="btn-small" onclick="resetAll()">
+            <svg style="width:11px;height:11px;vertical-align:-1px;margin-right:3px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Reset All
+          </button>
+        </div>
+      </div>
+      <div class="chart-wrap" id="ccont"><canvas id="cv"></canvas><div class="tooltip" id="tip"></div></div>
+      <p class="drag-hint">Drag any label to reposition. Adjust axes, fonts, and markers above.</p>
+      <div class="chart-footer">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--color-accent)"></div><span id="legCol">Brands</span></div>
+          <div class="legend-item"><div class="legend-diamond" style="background:var(--pale-sky);border:1px solid #999"></div><span id="legRow">Attributes</span></div>
+        </div>
+        <div class="export-btns">
+          <button class="btn-export" onclick="expPNG()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            PNG
+          </button>
+          <button class="btn-export" onclick="expSVG()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="inertia-bar" id="ib"></div>
+    </div>
+
+    <!-- When to Use Section -->
+    <div class="guide-section" id="guide">
+      <div class="guide-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <h3>When to Use This &amp; How to Read the Map</h3>
+      </div>
+
+      <p style="font-size:0.875rem;line-height:1.7;color:var(--color-text-secondary);max-width:780px;margin-bottom:1.75rem;">
+        A correspondence map works whenever you have a grid of numbers where rows and columns represent two different things you want to compare. It compresses all the relationships in that grid into a single visual — showing you which rows are associated with which columns, which ones are similar to each other, and where the real differentiation lies. Any cross-tabulation with numeric cells is a candidate.
+      </p>
+
+      <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1rem;">Use Cases</div>
+      <div class="guide-grid" style="margin-bottom:2rem;">
+        <div class="guide-card">
+          <div class="guide-card-title">Brands vs Attributes</div>
+          <div class="guide-card-text">The classic use. Rows are perceptual attributes (trustworthy, innovative, affordable). Columns are brands. The map shows which brands own which attributes in consumers' minds — and where white space exists for positioning.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">Segments vs Motivations</div>
+          <div class="guide-card-text">Rows are purchase drivers or needs (low fees, mobile app, status). Columns are customer segments. The map reveals which motivations pull which segments — essential for targeting and messaging strategy.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">Markets vs Features</div>
+          <div class="guide-card-text">Rows are product features or service capabilities. Columns are geographic markets or channels. Reveals which features matter most in each market — useful for localisation and go-to-market planning.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">Any Grid You Have</div>
+          <div class="guide-card-text">Departments vs competencies, media channels vs audience profiles, product categories vs occasions, touchpoints vs satisfaction drivers. If the data is a table with numeric cells, it works here.</div>
+        </div>
+      </div>
+
+      <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1rem;">Reading the Map</div>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-card-title">Closeness = Association</div>
+          <div class="guide-card-text">When a column point (circle) sits near a row point (diamond), those two are more strongly associated than points further apart. A brand near "innovative" is perceived as more innovative than a brand on the opposite side of the map. Look for clusters — they tell you which columns share a similar profile across rows.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">The Centre vs the Edges</div>
+          <div class="guide-card-text">Points near the origin (where the axes cross) are average — they don't stand out on any row or column. Points far from the centre have distinctive, differentiated profiles. If your brand sits dead-centre, it lacks a clear identity in the data. Edge positions are where strong associations live.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">Opposite Sides = Contrast</div>
+          <div class="guide-card-text">Points on opposite sides of the origin along the same axis represent opposing profiles. If "premium" is top-right and "affordable" is bottom-left, that axis captures the price-perception trade-off. These contrasts reveal the fundamental tensions in your data.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-card-title">Inertia = Explanatory Power</div>
+          <div class="guide-card-text">Each dimension (axis) explains a percentage of total variance, shown in the axis labels. Higher is better — Dimension 1 typically captures the dominant pattern, Dimension 2 the next strongest. If both axes together explain 70%+ of the variance, the map is a reliable summary. Below 50%, interpret with caution.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">research edge<span class="sep"> /</span>&ensp;&middot;&ensp;Vinay Thakur&ensp;&middot;&ensp;2026</div>
+      <div class="footer-right">
+        <a href="https://github.com/vtmade/research-edge-series" target="_blank" rel="noopener">Repository</a>
+        <a href="https://github.com/vtmade" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const BC=['#c4703f','#2D8B6F','#6B5B95','#0E7490','#B45309','#3A7CA5','#9B6B4A','#5C8A4D','#8B5CF6','#D44060'];
+const AFS='#888888',AFF='#d0dde8',AXC='#ddd',GC='#f4f3f1',LC='rgba(140,140,140,0.35)';
+const PD={t:52,r:56,b:58,l:58};
+let M=null,R=null,LO=[],cvs,cx2d,dpr,drag=null;
+
+function swm(m){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.m===m));document.getElementById('fm').classList.toggle('hid',m!=='file');document.getElementById('pm').classList.toggle('hid',m!=='paste');}
+const fd=document.getElementById('fd'),fi=document.getElementById('fi');
+fd.addEventListener('dragover',e=>e.preventDefault());
+fd.addEventListener('drop',e=>{e.preventDefault();if(e.dataTransfer.files.length)hf(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>{if(e.target.files.length)hf(e.target.files[0]);});
+
+function hf(f){
+  const ext=f.name.split('.').pop().toLowerCase();
+  if(ext==='csv'){const r=new FileReader();r.onload=e=>{document.getElementById('ct').value=e.target.result;swm('paste');};r.readAsText(f);}
+  else if(['xlsx','xls'].includes(ext)){
+    if(typeof XLSX==='undefined'){ss('SheetJS not loaded. Paste CSV instead.',true);return;}
+    const r=new FileReader();r.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});const csv=XLSX.utils.sheet_to_csv(wb.Sheets[wb.SheetNames[0]]);document.getElementById('ct').value=csv;swm('paste');}catch(err){ss('Excel read error',true);}};r.readAsArrayBuffer(f);
+  }else ss('Use .csv or .xlsx',true);
+}
+
+function pcsv(text){
+  const lines=text.trim().split(/\r?\n/).filter(l=>l.trim());
+  if(lines.length<3){ss('Need header + 2+ rows',true);return null;}
+  const delim=lines[0].includes('\t')?'\t':',';
+  const pl=line=>{const p=[];let c='',q=false;for(const ch of line){if(ch==='"')q=!q;else if(ch===delim&&!q){p.push(c.trim());c='';}else c+=ch;}p.push(c.trim());return p;};
+  const hdr=pl(lines[0]),cols=hdr.slice(1).filter(Boolean);
+  if(cols.length<2||cols.length>10){ss('Need 2-10 columns',true);return null;}
+  const rows=[],data=[];
+  for(let i=1;i<lines.length&&rows.length<30;i++){
+    const c2=pl(lines[i]);if(!c2[0])continue;
+    const row=[];let ok=true;
+    for(let j=1;j<=cols.length;j++){const v=parseFloat(c2[j]);if(isNaN(v)){ok=false;break;}row.push(v);}
+    if(ok&&row.length===cols.length){rows.push(c2[0]);data.push(row);}
+  }
+  if(rows.length<2){ss('Need 2+ valid numeric rows',true);return null;}
+  M={cols,rows,data};
+  ss(cols.length+' columns \u00d7 '+rows.length+' rows',false);
+  return M;
+}
+
+// ---- STANDARDISATION ----
+function standardise(data,mode){
+  const nR=data.length,nC=data[0].length;
+  let D=data.map(r=>[...r]);
+  if(mode==='raw') return D;
+  if(mode==='zscore'){
+    for(let i=0;i<nR;i++){
+      const mu=D[i].reduce((a,b)=>a+b,0)/nC;
+      const sd=Math.sqrt(D[i].reduce((s,v)=>s+(v-mu)**2,0)/nC)||1;
+      D[i]=D[i].map(v=>(v-mu)/sd+10);
+    }
+    return D;
+  }
+  if(mode==='double'){
+    const rM=D.map(r=>r.reduce((a,b)=>a+b,0)/nC);
+    const cM=Array(nC).fill(0);
+    for(let j=0;j<nC;j++){for(let i=0;i<nR;i++)cM[j]+=D[i][j];cM[j]/=nR;}
+    const gM=rM.reduce((a,b)=>a+b,0)/nR;
+    for(let i=0;i<nR;i++)for(let j=0;j<nC;j++)D[i][j]=D[i][j]-rM[i]-cM[j]+gM+10;
+    return D;
+  }
+  return D;
+}
+
+function go(){
+  const text=document.getElementById('ct').value;
+  if(!text.trim()){ss('No data',true);return;}
+  if(!pcsv(text))return;
+  const mode=document.getElementById('stdMode').value;
+  const stdData=standardise(M.data,mode);
+  const hasNeg=stdData.some(r=>r.some(v=>v<0));
+  if(hasNeg){ss('Standardised data has negatives \u2014 try a different method or raw',true);return;}
+  R=caCompute({cols:M.cols,rows:M.rows,data:stdData});
+  if(!R)return;
+  const cL=document.getElementById('colLabel').value||'Columns';
+  const rL=document.getElementById('rowLabel').value||'Rows';
+  document.getElementById('legCol').textContent=cL;
+  document.getElementById('legRow').textContent=rL;
+  document.getElementById('colFontLbl').textContent=cL+' Font';
+  document.getElementById('rowFontLbl').textContent=rL+' Font';
+  document.getElementById('colDotLbl').textContent=cL+' Marker';
+  document.getElementById('rowDotLbl').textContent=rL+' Marker';
+  initLO();
+  const cs=document.getElementById('cs');
+  cs.classList.remove('hid');
+  setTimeout(()=>{setupCv();autoFit();draw();updI();cs.scrollIntoView({behavior:'smooth'});},50);
+}
+
+function caCompute({cols,rows,data}){
+  const nR=rows.length,nC=cols.length;
+  const N=data.flat().reduce((a,b)=>a+b,0);
+  if(N===0){ss('All zeros',true);return null;}
+  const Pr=data.map(r=>r.map(v=>v/N));
+  const rM=Pr.map(r=>r.reduce((a,b)=>a+b,0));
+  const cM=Array(nC).fill(0);
+  for(let j=0;j<nC;j++)for(let i=0;i<nR;i++)cM[j]+=Pr[i][j];
+  const S=[];
+  for(let i=0;i<nR;i++){S[i]=[];for(let j=0;j<nC;j++)S[i][j]=(rM[i]>0&&cM[j]>0)?(Pr[i][j]-rM[i]*cM[j])/Math.sqrt(rM[i]*cM[j]):0;}
+  const dims=Math.min(2,Math.min(nR,nC)-1);
+  const U=[],V=[],sv=[];let Sc=S.map(r=>[...r]);
+  for(let d=0;d<dims;d++){
+    let v=Array(nC).fill(0).map(()=>Math.random()-0.5),sigma=0;
+    for(let it=0;it<300;it++){
+      let u=Array(nR).fill(0);for(let i=0;i<nR;i++)for(let j=0;j<nC;j++)u[i]+=Sc[i][j]*v[j];
+      let nu=Math.sqrt(u.reduce((s,x)=>s+x*x,0));if(nu<1e-14)break;u=u.map(x=>x/nu);
+      v=Array(nC).fill(0);for(let j=0;j<nC;j++)for(let i=0;i<nR;i++)v[j]+=Sc[i][j]*u[i];
+      sigma=Math.sqrt(v.reduce((s,x)=>s+x*x,0));if(sigma<1e-14)break;v=v.map(x=>x/sigma);
+    }
+    let u=Array(nR).fill(0);for(let i=0;i<nR;i++)for(let j=0;j<nC;j++)u[i]+=Sc[i][j]*v[j];
+    let nu=Math.sqrt(u.reduce((s,x)=>s+x*x,0));if(nu>1e-14)u=u.map(x=>x/nu);
+    U.push(u);V.push(v);sv.push(sigma);
+    for(let i=0;i<nR;i++)for(let j=0;j<nC;j++)Sc[i][j]-=sigma*u[i]*v[j];
+  }
+  const rc=[],cc=[];
+  for(let i=0;i<nR;i++){const x=rM[i]>0?U[0][i]*sv[0]/Math.sqrt(rM[i]):0;const y=dims>1&&rM[i]>0?U[1][i]*sv[1]/Math.sqrt(rM[i]):0;rc.push([x,y]);}
+  for(let j=0;j<nC;j++){const x=cM[j]>0?V[0][j]*sv[0]/Math.sqrt(cM[j]):0;const y=dims>1&&cM[j]>0?V[1][j]*sv[1]/Math.sqrt(cM[j]):0;cc.push([x,y]);}
+  const tI=sv.reduce((s,v)=>s+v*v,0);
+  return{rowCoords:rc,colCoords:cc,ie:sv.map(v=>tI>0?(v*v/tI)*100:0)};
+}
+
+function initLO(){
+  if(!R||!M)return;
+  const nA=M.rows.length,nB=M.cols.length,tot=nA+nB;LO=[];
+  const pts=[...R.rowCoords.map(c=>({x:c[0],y:c[1]})),...R.colCoords.map(c=>({x:c[0],y:c[1]}))];
+  const ax=pts.map(p=>p.x),ay=pts.map(p=>p.y);
+  const rx=Math.max(...ax)-Math.min(...ax)||1,ry=Math.max(...ay)-Math.min(...ay)||1;
+  const bo=Math.max(rx,ry)*0.04;
+  const mx=ax.reduce((a,b)=>a+b,0)/tot,my=ay.reduce((a,b)=>a+b,0)/tot;
+  for(let i=0;i<tot;i++){
+    let ang=Math.atan2(pts[i].y-my,pts[i].x-mx)+(Math.random()-0.5)*0.3;
+    const dist=bo*(i<nA?1.8:2.5);
+    LO.push({dx:Math.cos(ang)*dist,dy:Math.sin(ang)*dist});
+  }
+  fRelax(pts,80);
+}
+function fRelax(pts,iters){
+  const n=pts.length;if(!n)return;
+  const ax=pts.map(p=>p.x),ay=pts.map(p=>p.y);
+  const range=Math.max(Math.max(...ax)-Math.min(...ax),Math.max(...ay)-Math.min(...ay))||1;
+  const ms=range*0.05;
+  for(let it=0;it<iters;it++){
+    for(let i=0;i<n;i++){
+      const lx=pts[i].x+LO[i].dx,ly=pts[i].y+LO[i].dy;
+      let fx=0,fy=0;
+      for(let j=0;j<n;j++){
+        if(i===j)continue;
+        const dx=lx-(pts[j].x+LO[j].dx),dy=ly-(pts[j].y+LO[j].dy);
+        const d=Math.sqrt(dx*dx+dy*dy)||.001;
+        if(d<ms){const p=(ms-d)*.25;fx+=(dx/d)*p;fy+=(dy/d)*p;}
+      }
+      const sd=Math.sqrt(LO[i].dx**2+LO[i].dy**2)||.001;
+      if(sd<ms*.4){const p=(ms*.4-sd)*.2;fx+=(LO[i].dx/sd)*p;fy+=(LO[i].dy/sd)*p;}
+      LO[i].dx+=fx;LO[i].dy+=fy;
+    }
+  }
+}
+function resetLbl(){initLO();draw();}
+
+function resetAll(){
+  M=null;R=null;LO=[];
+  document.getElementById('cs').classList.add('hid');
+  document.getElementById('ct').value='';
+  document.getElementById('colLabel').value='Brands';
+  document.getElementById('rowLabel').value='Attributes';
+  document.getElementById('stdMode').value='raw';
+  swm('file');
+  ss('',false);
+}
+
+function autoFit(){
+  if(!R||!M)return;
+  const nA=M.rows.length;
+  const ax=[...R.rowCoords.map(c=>c[0]),...R.colCoords.map(c=>c[0])];
+  const ay=[...R.rowCoords.map(c=>c[1]),...R.colCoords.map(c=>c[1])];
+  for(let i=0;i<LO.length;i++){const b=i<nA?R.rowCoords[i]:R.colCoords[i-nA];ax.push(b[0]+LO[i].dx);ay.push(b[1]+LO[i].dy);}
+  let x0=Math.min(...ax),x1=Math.max(...ax),y0=Math.min(...ay),y1=Math.max(...ay);
+  const xp=(x1-x0)*.22||.3,yp=(y1-y0)*.22||.3;
+  x0-=xp;x1+=xp;y0-=yp;y1+=yp;
+  const xa=Math.max(Math.abs(x0),Math.abs(x1)),ya=Math.max(Math.abs(y0),Math.abs(y1));
+  document.getElementById('x0').value=(-xa).toFixed(2);
+  document.getElementById('x1').value=xa.toFixed(2);
+  document.getElementById('y0').value=(-ya).toFixed(2);
+  document.getElementById('y1').value=ya.toFixed(2);
+}
+
+function setupCv(){
+  cvs=document.getElementById('cv');cx2d=cvs.getContext('2d');dpr=window.devicePixelRatio||1;
+  rszCv();
+  cvs.onmousedown=onDn;cvs.onmousemove=onMv;cvs.onmouseup=onUp;cvs.onmouseleave=()=>{onUp();htip();};
+  cvs.ontouchstart=e=>{e.preventDefault();onDn(tm(e));};
+  cvs.ontouchmove=e=>{e.preventDefault();onMv(tm(e));};
+  cvs.ontouchend=()=>onUp();
+  window.onresize=()=>{rszCv();draw();};
+}
+function tm(e){const t=e.touches[0];return{clientX:t.clientX,clientY:t.clientY};}
+function rszCv(){const c=document.getElementById('ccont');const w=c.clientWidth,h=Math.max(460,Math.min(w*.6,680));cvs.width=w*dpr;cvs.height=h*dpr;cvs.style.width=w+'px';cvs.style.height=h+'px';cx2d.setTransform(dpr,0,0,dpr,0,0);}
+
+function gar(){return{xMin:parseFloat(document.getElementById('x0').value)||-1,xMax:parseFloat(document.getElementById('x1').value)||1,yMin:parseFloat(document.getElementById('y0').value)||-1,yMax:parseFloat(document.getElementById('y1').value)||1};}
+function gpa(){const W=cvs.width/dpr,H=cvs.height/dpr;return{W,H,pW:W-PD.l-PD.r,pH:H-PD.t-PD.b};}
+function d2p(dx,dy){const{xMin,xMax,yMin,yMax}=gar();const{pW,pH}=gpa();return{px:PD.l+((dx-xMin)/(xMax-xMin))*pW,py:PD.t+((yMax-dy)/(yMax-yMin))*pH};}
+function nn(range){if(range<=0)return .1;const ex=Math.floor(Math.log10(range));const f=range/Math.pow(10,ex);let n;if(f<=1.5)n=1;else if(f<=3)n=2;else if(f<=7)n=5;else n=10;return n*Math.pow(10,ex);}
+function rl(v,step){return Math.abs(v)<1e-10?'0':step<0.01?v.toFixed(3):step<0.1?v.toFixed(2):v.toFixed(1);}
+
+function draw(){
+  if(!R||!M||!cx2d)return;
+  const c=cx2d;
+  const{W,H,pW,pH}=gpa();const{xMin,xMax,yMin,yMax}=gar();
+  if(xMax<=xMin||yMax<=yMin)return;
+  c.clearRect(0,0,W,H);c.fillStyle='#FFF';c.fillRect(0,0,W,H);
+  const bfz=+document.getElementById('bf').value||13;
+  const afz=+document.getElementById('af').value||10;
+  const bds=+document.getElementById('bd').value||9;
+  const ads=+document.getElementById('ad').value||5;
+  const sL=document.getElementById('sl').checked;
+  const sO=document.getElementById('so').checked;
+  const nA=M.rows.length;
+
+  // Grid
+  c.strokeStyle=GC;c.lineWidth=.5;
+  const xs=nn((xMax-xMin)/6);
+  for(let v=Math.ceil(xMin/xs)*xs;v<=xMax+xs*.01;v+=xs){const{px}=d2p(v,0);if(px>=PD.l-1&&px<=W-PD.r+1){c.beginPath();c.moveTo(px,PD.t);c.lineTo(px,H-PD.b);c.stroke();c.fillStyle='#999';c.font='10px Inter,sans-serif';c.textAlign='center';c.textBaseline='top';c.fillText(rl(v,xs),px,H-PD.b+4);}}
+  const ys=nn((yMax-yMin)/6);
+  for(let v=Math.ceil(yMin/ys)*ys;v<=yMax+ys*.01;v+=ys){const{py}=d2p(0,v);if(py>=PD.t-1&&py<=H-PD.b+1){c.beginPath();c.moveTo(PD.l,py);c.lineTo(W-PD.r,py);c.stroke();c.fillStyle='#999';c.font='10px Inter,sans-serif';c.textAlign='right';c.textBaseline='middle';c.fillText(rl(v,ys),PD.l-6,py);}}
+
+  c.strokeStyle=AXC;c.lineWidth=1;
+  const o=d2p(0,0);
+  if(o.py>=PD.t&&o.py<=H-PD.b){c.beginPath();c.moveTo(PD.l,o.py);c.lineTo(W-PD.r,o.py);c.stroke();}
+  if(o.px>=PD.l&&o.px<=W-PD.r){c.beginPath();c.moveTo(o.px,PD.t);c.lineTo(o.px,H-PD.b);c.stroke();}
+
+  const d1=(R.ie[0]||0).toFixed(1),d2v=(R.ie[1]||0).toFixed(1);
+  c.fillStyle='#888';c.font='500 11px Inter,sans-serif';c.textAlign='center';c.textBaseline='top';
+  c.fillText('Dimension 1 ('+d1+'%)',PD.l+pW/2,H-14);
+  c.save();c.translate(14,PD.t+pH/2);c.rotate(-Math.PI/2);c.textBaseline='bottom';c.fillText('Dimension 2 ('+d2v+'%)',0,0);c.restore();
+
+  if(sO){c.strokeStyle='rgba(190,190,210,.3)';c.lineWidth=.6;[...R.rowCoords,...R.colCoords].forEach(([a,b])=>{const p=d2p(a,b);c.beginPath();c.moveTo(o.px,o.py);c.lineTo(p.px,p.py);c.stroke();});}
+
+  // Rows (diamonds)
+  R.rowCoords.forEach(([a,b],i)=>{
+    const p=d2p(a,b),s=ads;
+    c.fillStyle=AFF;c.strokeStyle=AFS;c.lineWidth=1;
+    c.beginPath();c.moveTo(p.px,p.py-s);c.lineTo(p.px+s,p.py);c.lineTo(p.px,p.py+s);c.lineTo(p.px-s,p.py);c.closePath();c.fill();c.stroke();
+    const off=LO[i]||{dx:0,dy:0};const lp=d2p(a+off.dx,b+off.dy);
+    if(sL){const dist=Math.hypot(lp.px-p.px,lp.py-p.py);if(dist>8){c.strokeStyle=LC;c.lineWidth=.8;c.beginPath();c.moveTo(p.px,p.py);c.lineTo(lp.px,lp.py);c.stroke();}}
+    c.fillStyle='#555';c.font='400 '+afz+'px Inter,sans-serif';c.textAlign='center';c.textBaseline='middle';
+    c.fillText(M.rows[i],lp.px,lp.py);
+  });
+
+  // Cols (circles)
+  R.colCoords.forEach(([a,b],j)=>{
+    const p=d2p(a,b),col=BC[j%BC.length],idx=nA+j;
+    c.beginPath();c.arc(p.px,p.py,bds,0,Math.PI*2);c.fillStyle=col;c.fill();c.strokeStyle='#FFF';c.lineWidth=1.5;c.stroke();
+    const off=LO[idx]||{dx:0,dy:0};const lp=d2p(a+off.dx,b+off.dy);
+    if(sL){const dist=Math.hypot(lp.px-p.px,lp.py-p.py);if(dist>12){c.strokeStyle=col+'55';c.lineWidth=1;c.beginPath();c.moveTo(p.px,p.py);c.lineTo(lp.px,lp.py);c.stroke();}}
+    c.fillStyle=col;c.font='700 '+bfz+'px Inter,sans-serif';c.textAlign='center';c.textBaseline='middle';
+    c.fillText(M.cols[j],lp.px,lp.py);
+  });
+
+  c.fillStyle='#191919';c.font='700 14px Inter,sans-serif';c.textAlign='left';c.textBaseline='top';
+  c.fillText('Correspondence Analysis \u2014 Perceptual Map',PD.l,12);
+
+  // Standardisation badge
+  const stdMode=document.getElementById('stdMode').value;
+  if(stdMode!=='raw'){
+    const labels={double:'Equalised',zscore:'Fully Normalised'};
+    const badgeTxt='Std: '+(labels[stdMode]||stdMode);
+    c.font='500 10px Inter,sans-serif';
+    const tw=c.measureText(badgeTxt).width;
+    c.fillStyle='rgba(196,112,63,0.08)';
+    c.fillRect(W-PD.r-tw-16,8,tw+12,18);
+    c.fillStyle='#c4703f';
+    c.textAlign='right';c.textBaseline='top';
+    c.fillText(badgeTxt,W-PD.r-8,11);
+  }
+}
+
+// Drag
+function hitLbl(mx,my){
+  if(!R||!M)return null;
+  const nA=M.rows.length,nB=M.cols.length;
+  const bfz=+document.getElementById('bf').value||13,afz=+document.getElementById('af').value||10;
+  for(let j=0;j<nB;j++){const idx=nA+j;const[a,b]=R.colCoords[j];const off=LO[idx]||{dx:0,dy:0};const lp=d2p(a+off.dx,b+off.dy);cx2d.font='700 '+bfz+'px Inter,sans-serif';const tw=cx2d.measureText(M.cols[j]).width;if(Math.abs(mx-lp.px)<tw/2+5&&Math.abs(my-lp.py)<bfz/2+5)return idx;}
+  for(let i=0;i<nA;i++){const[a,b]=R.rowCoords[i];const off=LO[i]||{dx:0,dy:0};const lp=d2p(a+off.dx,b+off.dy);cx2d.font='400 '+afz+'px Inter,sans-serif';const tw=cx2d.measureText(M.rows[i]).width;if(Math.abs(mx-lp.px)<tw/2+5&&Math.abs(my-lp.py)<afz/2+5)return i;}
+  return null;
+}
+
+function onDn(e){const rect=cvs.getBoundingClientRect();const mx=e.clientX-rect.left,my=e.clientY-rect.top;const h=hitLbl(mx,my);if(h!==null){cvs.style.cursor='grabbing';drag={idx:h,sx:mx,sy:my,sdx:LO[h].dx,sdy:LO[h].dy};}}
+function onMv(e){
+  const rect=cvs.getBoundingClientRect();const mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  if(drag){const{xMin,xMax,yMin,yMax}=gar();const{pW,pH}=gpa();LO[drag.idx].dx=drag.sdx+((mx-drag.sx)/pW)*(xMax-xMin);LO[drag.idx].dy=drag.sdy-((my-drag.sy)/pH)*(yMax-yMin);draw();htip();return;}
+  const bds=+document.getElementById('bd').value||9;let found=false;
+  if(M&&R){
+    for(let j=0;j<M.cols.length;j++){const p=d2p(...R.colCoords[j]);if(Math.hypot(mx-p.px,my-p.py)<bds+4){stip(mx,my,M.cols[j],R.colCoords[j]);cvs.style.cursor='pointer';found=true;break;}}
+    if(!found)for(let i=0;i<M.rows.length;i++){const p=d2p(...R.rowCoords[i]);if(Math.hypot(mx-p.px,my-p.py)<8){stip(mx,my,M.rows[i],R.rowCoords[i]);cvs.style.cursor='pointer';found=true;break;}}
+  }
+  if(!found){const h=hitLbl(mx,my);cvs.style.cursor=h!==null?'grab':'crosshair';htip();}
+}
+function onUp(){drag=null;if(cvs)cvs.style.cursor='crosshair';}
+function stip(mx,my,label,coords){const t=document.getElementById('tip');t.innerHTML='<strong>'+label+'</strong><br>D1: '+coords[0].toFixed(3)+' D2: '+coords[1].toFixed(3);t.style.display='block';t.style.left=(mx+14)+'px';t.style.top=(my-10)+'px';}
+function htip(){document.getElementById('tip').style.display='none';}
+function updI(){const d1=(R.ie[0]||0).toFixed(1),d2v=(R.ie[1]||0).toFixed(1),tot=(parseFloat(d1)+parseFloat(d2v)).toFixed(1);const cL=document.getElementById('colLabel').value||'Columns';const rL=document.getElementById('rowLabel').value||'Rows';const mode=document.getElementById('stdMode').value;const mLbl={raw:'None',double:'Equalised',zscore:'Fully Normalised'};document.getElementById('ib').innerHTML='<strong>Inertia:</strong> Dim 1 = '+d1+'% | Dim 2 = '+d2v+'% | <strong>Total = '+tot+'%</strong> \u2014 '+M.cols.length+' '+cL.toLowerCase()+' \u00d7 '+M.rows.length+' '+rL.toLowerCase()+' | Standardisation: '+mLbl[mode];}
+
+// Export
+function expPNG(){const l=document.createElement('a');l.download='correspondence_map.png';l.href=cvs.toDataURL('image/png',1);l.click();}
+function expSVG(){
+  const{W,H,pW,pH}=gpa();const{xMin,xMax,yMin,yMax}=gar();
+  const bfz=+document.getElementById('bf').value||13,afz=+document.getElementById('af').value||10;
+  const bds=+document.getElementById('bd').value||9,adz=+document.getElementById('ad').value||5;
+  const sL=document.getElementById('sl').checked;const nA=M.rows.length;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const dp2=(x,y)=>({px:PD.l+((x-xMin)/(xMax-xMin))*pW,py:PD.t+((yMax-y)/(yMax-yMin))*pH});
+  let s='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'"><rect width="'+W+'" height="'+H+'" fill="white"/>';
+  const o=dp2(0,0);
+  s+='<line x1="'+PD.l+'" y1="'+o.py+'" x2="'+(W-PD.r)+'" y2="'+o.py+'" stroke="'+AXC+'" stroke-width="1"/>';
+  s+='<line x1="'+o.px+'" y1="'+PD.t+'" x2="'+o.px+'" y2="'+(H-PD.b)+'" stroke="'+AXC+'" stroke-width="1"/>';
+  R.rowCoords.forEach(([a,b],i)=>{const p=dp2(a,b),sz=adz,off=LO[i]||{dx:0,dy:0},lp=dp2(a+off.dx,b+off.dy);if(sL&&Math.hypot(lp.px-p.px,lp.py-p.py)>8)s+='<line x1="'+p.px+'" y1="'+p.py+'" x2="'+lp.px+'" y2="'+lp.py+'" stroke="'+LC+'" stroke-width=".8"/>';s+='<polygon points="'+p.px+','+(p.py-sz)+' '+(p.px+sz)+','+p.py+' '+p.px+','+(p.py+sz)+' '+(p.px-sz)+','+p.py+'" fill="'+AFF+'" stroke="'+AFS+'" stroke-width="1"/>';s+='<text x="'+lp.px+'" y="'+(lp.py+3)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="'+afz+'" fill="#555">'+esc(M.rows[i])+'</text>';});
+  R.colCoords.forEach(([a,b],j)=>{const p=dp2(a,b),col=BC[j%BC.length],idx=nA+j,off=LO[idx]||{dx:0,dy:0},lp=dp2(a+off.dx,b+off.dy);if(sL&&Math.hypot(lp.px-p.px,lp.py-p.py)>12)s+='<line x1="'+p.px+'" y1="'+p.py+'" x2="'+lp.px+'" y2="'+lp.py+'" stroke="'+col+'55" stroke-width="1"/>';s+='<circle cx="'+p.px+'" cy="'+p.py+'" r="'+bds+'" fill="'+col+'" stroke="white" stroke-width="1.5"/>';s+='<text x="'+lp.px+'" y="'+(lp.py+4)+'" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="'+bfz+'" fill="'+col+'">'+esc(M.cols[j])+'</text>';});
+  const d1=(R.ie[0]||0).toFixed(1),d2x=(R.ie[1]||0).toFixed(1);
+  s+='<text x="'+PD.l+'" y="26" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#191919">Correspondence Analysis \u2014 Perceptual Map</text>';
+  s+='<text x="'+(W/2)+'" y="'+(H-10)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#888">Dimension 1 ('+d1+'%)</text>';
+  s+='<text x="14" y="'+(H/2)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#888" transform="rotate(-90 14 '+(H/2)+')">Dimension 2 ('+d2x+'%)</text>';
+  s+='</svg>';
+  const blob=new Blob([s],{type:'image/svg+xml'});const l=document.createElement('a');l.download='correspondence_map.svg';l.href=URL.createObjectURL(blob);l.click();
+}
+
+// Samples
+function loadSample(type){
+  if(type==='brand'){
+    document.getElementById('colLabel').value='Brands';
+    document.getElementById('rowLabel').value='Attributes';
+    document.getElementById('stdMode').value='raw';
+    document.getElementById('ct').value=`,Alpha Bank,BetaPay,ClearCard,DeltaFin,EverWallet,FinoBank,GoPay
+Trustworthy,72,45,68,51,38,64,42
+Innovative,35,78,42,67,82,40,71
+Premium Feel,68,32,71,55,28,60,35
+Easy to Use,40,72,55,48,85,52,78
+Rewards,55,62,48,73,45,58,70
+Secure,78,52,74,60,42,72,48
+Affordable,30,65,38,42,75,45,72
+Good for Travel,62,48,70,58,35,55,40
+Digital First,28,82,35,72,88,38,76
+Customer Service,65,38,60,45,42,68,35
+Status Symbol,70,25,72,50,20,58,28
+Widely Accepted,75,68,72,62,55,70,65
+Transparent Fees,38,58,45,40,72,42,68
+Cashback,42,70,50,75,55,48,65
+International,65,45,68,55,38,58,42
+Youth Friendly,25,75,32,62,82,30,78
+Family Oriented,60,35,55,40,38,62,32
+Salary Account,72,28,60,45,30,68,25
+Contactless,45,78,52,70,85,48,80
+Branch Network,70,22,62,38,15,72,20`;
+  } else {
+    document.getElementById('colLabel').value='Segments';
+    document.getElementById('rowLabel').value='Drivers & Barriers';
+    document.getElementById('stdMode').value='double';
+    document.getElementById('ct').value=`,Young Professionals,Affluent Families,Digital Natives,Value Seekers,Premium Traditionalists,SME Owners
+Low fees,35,42,55,92,30,68
+Cashback rewards,62,58,70,78,40,45
+Premium lounge access,25,72,18,12,88,55
+Mobile app quality,78,45,95,60,22,52
+Branch availability,15,55,8,65,82,70
+International acceptance,70,80,65,30,75,90
+Status / prestige,55,68,30,8,92,48
+Family account features,10,90,5,55,35,42
+Buy-now-pay-later,82,30,88,70,10,35
+Salary advance,65,20,72,85,15,60
+Investment tools,45,75,55,15,70,82
+Crypto support,70,12,90,25,8,30
+Customer service,35,62,28,72,78,65
+Data privacy,40,70,75,55,85,60
+Islamic banking,30,65,20,48,55,72
+Loyalty program,55,58,62,80,45,50
+Fast onboarding,80,35,92,60,18,55
+Joint accounts,8,85,10,40,30,48
+Business tools,15,25,20,30,12,95
+Credit limit flexibility,60,55,45,75,65,80`;
+  }
+  swm('paste');ss('Sample loaded \u2014 click Generate Map',false);
+}
+
+function ss(msg,err){const el=document.getElementById('st');el.textContent=msg;el.className='status-msg'+(err?' err':'');}
+</script>
+</body>
+</html>
