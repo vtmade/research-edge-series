@@ -99,17 +99,43 @@ Understand why most AI-powered qualitative analysis produces summaries that look
 
 **Claude Skill:** A companion Claude Skill for structured qualitative analysis is available in the [claude-skills](./claude-skills/) directory.
 
+### [#006: A Working Framework for Using GenAI on Quantitative Survey Data](./articles/006-genai-quant-survey-workflow.md)
+**Why Aggregate Quant Work Breaks LLMs, and the Workflow That Puts the Rigour Back In**
+
+Aggregate quantitative work is exactly where LLMs fail most often — and where teams are most eager to apply them. This article introduces a Prep → Validation → Analysis framework built around a flat-data contract that lets the LLM interpret while Python computes. Three prep paths handle every starting point: a crosstab from the agency, raw data destined for multivariate analysis, or raw data that needs cross-cut tables produced from scratch.
+
+**Key Topics:**
+• Why raw respondent files and layout-heavy crosstabs both confuse LLMs
+• The flat-data shape that makes the rest of the workflow possible
+• Three prep paths: flatten / block extract / generate
+• Light-touch validation embedded in code, not workflow
+• Where the LLM earns its keep — code, interpretation, drafting findings
+
+**Available Formats:** [📄 Article](./articles/006-genai-quant-survey-workflow.md)
+
+**Companion artefacts:** [`flatten-crosstab` skill](./claude-skills/flatten-crosstab.zip) · [`extract-crosstabs` skill](./claude-skills/extract-crosstabs.zip) · [`tidy-data-analysis` skill](./claude-skills/tidy-data-analysis.zip) · [Flat-format DP delivery spec](./assets/006-dp-flat-format-spec.md)
+
 ---
 
 ## Tools & Interactive Resources
 
 ### Correspondence Analysis Map
-A browser-based interactive tool for correspondence analysis. Paste or upload any grid data — brands × attributes, segments × motivations, markets × features — and generate a perceptual biplot. Handles the big-brand effect through built-in standardisation, supports draggable labels for cluttered maps, and exports publication-ready PNG and SVG.
+A browser-based interactive tool for correspondence analysis. Paste or upload any grid data — brands × attributes, segments × motivations, markets × features — and generate a perceptual biplot. Handles the big-brand effect through built-in standardisation, supports draggable labels for cluttered maps, and exports publication-ready PNG, SVG, and the underlying coordinate scores as CSV.
 
-**Available on the live site** — no installation needed, runs entirely in the browser.
+**Available on the live site** — no installation needed, runs entirely in the browser. A companion Claude skill (`correspondence-analysis.zip`) is in the [claude-skills](./claude-skills/) directory.
 
-### [Qualitative Text Analysis Skill](./claude-skills/)
-A structured qualitative analysis pipeline for Claude. See [#005](./articles/005-ai-qualitative-analysis.md) for the companion article.
+### [Qualitative Text Analysis Skill](./claude-skills/qual-analysis.zip)
+A structured qualitative analysis pipeline for Claude — open coding, theme construction, six-lens pattern detection, full source traceability. See [#005](./articles/005-ai-qualitative-analysis.md) for the companion article.
+
+### GenAI on Quantitative Survey Data — workflow skills
+Three composable Claude Code skills plus a delivery specification, all designed to compose end-to-end with the flat-data format as the contract between them. Companion to [#006](./articles/006-genai-quant-survey-workflow.md).
+
+| Artefact | What it does | Where it sits |
+|---|---|---|
+| [`flatten-crosstab.zip`](./claude-skills/flatten-crosstab.zip) | Flattens agency crosstabs (XLSX/XLS/CSV) into the flat format. Inspect → confirm → flatten with a four-check validation report. | Path A — crosstab in hand |
+| [Flat-format delivery spec](./assets/006-dp-flat-format-spec.md) | DP instruction set that defines the flat output shape semantically — required columns, row-type taxonomy, value conventions. Worked examples and edge-case FAQ. | Path A — flat format produced at source |
+| [`extract-crosstabs.zip`](./claude-skills/extract-crosstabs.zip) | Generates flat-format crosstabs directly from raw respondent data (.sav/.csv/.xlsx). All five question types, weighting, conditional bases, custom NETs, optional significance testing. | Path C — only raw data, need the tables |
+| [`tidy-data-analysis.zip`](./claude-skills/tidy-data-analysis.zip) | Picks up after prep — interactive analytical moves, evidence-pinned findings, four sanity checks per finding, resumable sessions. | Analysis stage — flat file → defensible findings |
 
 ---
 
@@ -118,7 +144,7 @@ A structured qualitative analysis pipeline for Claude. See [#005](./articles/005
 ```
 research-edge-series/
 ├── articles/           # Series articles in markdown format
-├── assets/            # PDFs, images, diagrams, and supporting materials
+├── assets/            # PDFs, images, diagrams, specifications, supporting materials
 ├── claude-skills/     # Claude Skills for research methodology
 └── README.md          # This file
 ```

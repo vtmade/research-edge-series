@@ -46,6 +46,13 @@ Why copying successful companies usually fails and how rigorous research fixes t
 
 Why most AI tools flatten qualitative data. Covers rigorous qualitative analysis methods — coding, theme construction, pattern detection — and how to use AI as a structured analytical layer with full traceability.
 
+### #006: A Working Framework for Using GenAI on Quantitative Survey Data
+**File:** `006-genai-quant-survey-workflow.md`
+**Topic:** GenAI Workflows for Quantitative Survey Research
+**Date:** April 2026
+
+Why aggregate quant work breaks LLMs, and the workflow that puts the rigour back in. Introduces a Prep → Validation → Analysis framework built around a flat-data contract, three prep paths (flatten / block extract / generate), and four open-source artefacts that compose end-to-end. Companion artefacts: [`flatten-crosstab`](../claude-skills/flatten-crosstab.zip), [`extract-crosstabs`](../claude-skills/extract-crosstabs.zip), [`tidy-data-analysis`](../claude-skills/tidy-data-analysis.zip), and the [flat-format DP delivery spec](../assets/006-dp-flat-format-spec.md).
+
 ---
 
 ## Upcoming Articles
